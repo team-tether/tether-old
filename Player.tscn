@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://player.png" type="Texture" id=2]
+[ext_resource path="res://Rope.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.8425
@@ -21,5 +22,10 @@ velocity_input_threshold = Vector2( 400, 300 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Rope" type="Line2D" parent="."]
+width = 2.0
+default_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 3 )
