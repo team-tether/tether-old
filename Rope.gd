@@ -29,3 +29,6 @@ func pivot():
 func reset():
 	global_points.resize(0)
 	clear_points()
+
+func is_tethered():
+	return global_points.size() > 0

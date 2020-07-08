@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "FSM",
+"language": "GDScript",
+"path": "res://addons/node_fsm_plugin/fsm_node.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://addons/node_fsm_plugin/state_node.gd"
+} ]
 _global_script_class_icons={
-
+"FSM": "res://addons/node_fsm_plugin/fsm_icon.svg",
+"State": "res://addons/node_fsm_plugin/state_icon.svg"
 }
 
 [application]
