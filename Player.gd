@@ -16,9 +16,14 @@ export var untethered_drag = 1
 export var jump_force = -500
 export var velocity_input_threshold = Vector2(300, 300)
 
+export var max_rope_length = 300
+
 var acceleration = Vector2()
 var velocity = Vector2()
 var state = PlayerState.TETHERED
+
+export var rope_shoot_angle = PI/4
+export var max_rope_shoot_angle = PI/4
 
 onready var sprite = $Sprite
 onready var rope = $Rope
@@ -27,13 +32,7 @@ func _ready():
 	rset_config("velocity", MultiplayerAPI.RPC_MODE_REMOTE)
 	rset_config("position", MultiplayerAPI.RPC_MODE_REMOTE)
 	
-	var space_state = get_world_2d().direct_space_state
-	# use global coordinates, not local to node
-	var rope_v = Vector2(cos(deg2rad(-15)), sin(deg2rad(-15))) * 1000
-	var result = space_state.intersect_ray(position, position + rope_v, [get_rid()])
-	
-	rope.length = (position - result.position).length()
-	rope.push(result.position)
+	_shoot_rope()
 
 func _tethered_movement(delta):
 	var move_direction = _get_move_direction()
@@ -65,17 +64,33 @@ func _tethered_movement(delta):
 		
 	rope.length = (position - rope.pivot()).length()
 	
+	rope_shoot_angle = clamp(to_pivot.angle_to(Vector2.DOWN), -max_rope_shoot_angle, max_rope_shoot_angle)
+	
 	if Input.is_action_just_pressed("toggle_rope"):
 		rope.hide()
 		state = PlayerState.FALLING
+		
+func _shoot_rope():
+	var space_state = get_world_2d().direct_space_state
+	var rope_v = Vector2.UP.rotated(rope_shoot_angle) * max_rope_length
+	var result = space_state.intersect_ray(position, position + rope_v, [get_rid()])
+	
+	if result:
+		rope.reset()
+		rope.length = (position - result.position).length()
+		rope.push(result.position)
+	
+		# TODO: Better state management for this
+		state = PlayerState.TETHERED
+		rope.show()
 
 func _normal_movement(delta, drag):
 	var apply_drag = false
-	acceleration = Vector2(0, gravity)
+	acceleration = Vector2.DOWN * gravity
 	
 	if true || is_network_master():
 		var move_direction = _get_move_direction()
-		var move_force = move_direction * move_speed
+		var move_force = move_direction * Vector2.RIGHT * move_speed
 		
 		acceleration += move_force
 		velocity += acceleration
@@ -113,6 +128,8 @@ func _physics_process(delta):
 				_jump()
 		PlayerState.FALLING:
 			_normal_movement(delta, air_drag)
+			if Input.is_action_just_pressed("toggle_rope"):
+				_shoot_rope()
 		PlayerState.TETHERED:
 			_tethered_movement(delta)
 

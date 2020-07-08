@@ -25,3 +25,7 @@ func pop():
 
 func pivot():
 	return global_points[global_points.size() - 1]
+
+func reset():
+	global_points.resize(0)
+	clear_points()
