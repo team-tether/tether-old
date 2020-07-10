@@ -476,6 +476,7 @@ script = ExtResource( 2 )
 [node name="Level" type="StaticBody2D" parent="."]
 
 [node name="TileMap" type="TileMap" parent="Level"]
+position = Vector2( 0, -1 )
 tile_set = SubResource( 50 )
 cell_quadrant_size = 64
 collision_use_parent = true

@@ -28,9 +28,7 @@ func _ready():
 func _physics_process(delta):
 	if velocity.x != 0:
 		sprite.flip_h = velocity.x < 0
-		
 	
-
 	if is_network_master():
 		rset("velocity", velocity)
 		rset("position", position)
@@ -54,7 +52,7 @@ func normal_movement(delta, drag):
 	var apply_drag = false
 	acceleration = Vector2.DOWN * gravity
 	
-	if is_network_master():
+	if false and is_network_master():
 		var move_direction = get_move_direction()
 		var move_force = move_direction * Vector2.RIGHT * move_speed
 		

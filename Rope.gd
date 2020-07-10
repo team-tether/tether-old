@@ -42,5 +42,9 @@ func pivot():
 
 func is_tethered():
 	return global_points.size() > 0
-	
 
+func previous_pivot():
+	var size = global_points.size()
+	if size > 1:
+		return global_points[size - 2]
+		

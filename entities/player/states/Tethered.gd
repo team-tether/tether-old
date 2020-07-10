@@ -7,7 +7,7 @@ export var restitution = 1
 export var active_restitution = 1.3
 export var max_velocity_mag = 1000
 
-var rope_intersect_ray
+var last_delta_angle = 0
 
 func on_enter(player):
 	call_deferred("deferred_enter", player)
@@ -60,6 +60,8 @@ func on_physics_process(player, delta):
 	
 	player.rotation = -to_pivot.angle_to(Vector2.DOWN)
 	
+	var prev_pivot = player.rope.previous_pivot()
+	
 	var space_state = player.get_world_2d().direct_space_state
 	var rope_ray_result = space_state.intersect_ray(player.rope.pivot() + (resulting_to_pivot * 0.1), player.position, [player])
 	
@@ -77,17 +79,33 @@ func on_physics_process(player, delta):
 		
 		var point = closest_point(points, rope_ray_result.position)
 		
+		if prev_pivot:
+			var delta_angle = (prev_pivot - player.rope.pivot()).angle_to(player.rope.pivot() - point)
+			
+			if delta_angle == 0:
+				player.rope.pop()
+
 		player.rope.push(point)
 		player.rope.length = (player.position - player.rope.pivot()).length()
 	
+	var pivot = player.rope.pivot()
+	if prev_pivot:
+		var delta_angle = (prev_pivot - pivot).angle_to(pivot - player.position)
+		
+		if (delta_angle >= 0 and last_delta_angle < 0) or (delta_angle <= 0 and last_delta_angle > 0):
+			player.rope.pop()
+			player.rope.length = (player.position - player.rope.pivot()).length()
+			last_delta_angle = 0
+		else:
+			last_delta_angle = delta_angle
+	
 	if is_network_master() and Input.is_action_just_pressed("toggle_rope"):
 		go_to("Falling")
+	
 
 func closest_point(points: PoolVector2Array, point: Vector2):
 	var closest_dist = INF
 	var closest
-	
-	print(points, point)
 	
 	for p in points:
 		var dist = p.distance_squared_to(point)
