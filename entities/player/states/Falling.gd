@@ -7,5 +7,5 @@ func on_physics_process(player, delta):
 	
 	player.rotation = lerp_angle(player.rotation, player.rope_shoot_angle, 0.08)
 	
-	if Input.is_action_just_pressed("toggle_rope"):
+	if is_network_master() and Input.is_action_just_pressed("toggle_rope"):
 		player.shoot_rope()
