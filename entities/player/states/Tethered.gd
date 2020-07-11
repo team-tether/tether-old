@@ -1,11 +1,12 @@
-extends "res://addons/node_fsm_plugin/state_node.gd"
+extends State
 
 export var speed = 15
 export var drag = 0.99
 export var max_rope_shoot_angle = PI/4
+export var rope_length_speed = 200
 export var restitution = 1
 export var active_restitution = 1.3
-export var max_velocity_mag = 1000
+export var max_velocity_mag = 1600
 
 var last_delta_angle = 0
 
@@ -16,6 +17,10 @@ func deferred_enter(player):
 	player.rope.show()
 
 func on_exit(player):
+#	rigidBody.velocity.magnitude * 100 * (ropeFlipped ? -1 : 1)
+	var rope_flipped = (player.rope.pivot() - player.position).angle_to(player.velocity) > 0
+	print(player.velocity.length())
+	player.angular_velocity = player.velocity.length() * .05 * (-1 if rope_flipped else 1)
 	player.rope.hide()
 
 func on_physics_process(player, delta):
@@ -28,20 +33,20 @@ func on_physics_process(player, delta):
 	
 	player.acceleration = Vector2.DOWN * player.gravity
 	
-	if is_network_master():
-		if move_direction.x != 0:
+	if is_network_master() and move_direction.x != 0:
 			player.acceleration += Vector2(move_direction.x * speed, speed)
-			
-		if move_direction.y != 0:
-			var new_rope_length = player.rope.length + move_direction.y * 5
-			player.acceleration *= pow(player.rope.length / new_rope_length, 2)
-			player.rope.length = new_rope_length
 	
 	player.velocity += player.acceleration
-	
 	player.velocity = tangent * player.velocity.dot(tangent) * drag
-	
 	player.velocity = player.velocity.clamped(max_velocity_mag)
+	
+	if is_network_master() and move_direction.y != 0:
+		var new_rope_length = player.rope.length + move_direction.y * rope_length_speed * delta
+		
+		var vel_before = player.velocity
+		player.velocity *= pow(player.rope.length / new_rope_length, 1)
+		player.rope.length = new_rope_length
+	
 	
 	var new_position = player.position + (player.velocity * delta)
 	var new_to_pivot = new_position - player.rope.pivot()

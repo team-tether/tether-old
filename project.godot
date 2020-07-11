@@ -28,6 +28,9 @@ _global_script_class_icons={
 
 config/name="Tether"
 run/main_scene="res://Lobby.tscn"
+boot_splash/image="res://entities/player/player.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 
 [autoload]
 

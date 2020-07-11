@@ -1,10 +1,9 @@
 extends KinematicBody2D
 
-export var gravity = 5
+export var gravity = 12.5
 export var move_speed = 10
 export var ground_drag = 0.8
 export var air_drag = 1
-export var jump_force = -500
 export var velocity_input_threshold = Vector2(300, 300)
 
 export var rope_shoot_angle = PI/4
@@ -12,6 +11,9 @@ export var max_rope_length = 300
 
 var acceleration = Vector2()
 var velocity = Vector2()
+var angular_velocity = 0
+
+onready var start_time = OS.get_ticks_msec()
 
 onready var states: FSM = $States as FSM
 onready var sprite = $Sprite
@@ -33,9 +35,6 @@ func _physics_process(delta):
 		rset("velocity", velocity)
 		rset("position", position)
 		rset("rotation", rotation)
-
-func jump():
-	velocity.y = jump_force
 	
 func shoot_rope():
 	var rope_v = Vector2.UP.rotated(rope_shoot_angle) * max_rope_length

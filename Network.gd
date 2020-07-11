@@ -8,7 +8,7 @@ var players = []
 func _ready():
 	player_scene = preload("res://entities/player/Player.tscn")
 	get_tree().connect("connected_to_server", self, "_connected_ok")
-	call_deferred("on_host_game")
+#	call_deferred("on_host_game")
 
 func on_host_game():
 	var host = NetworkedMultiplayerENet.new()
