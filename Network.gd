@@ -34,10 +34,13 @@ func _connected_ok():
 # this function is called when a new player is connected
 # note the use of the keyword remote which mean that the code will only be called on the others
 remote func register_player(player_id):
-	var player = player_scene.instance()
+	var root = get_tree().get_root()
+	var spawn = root.get_node("Game/Spawn")
+	var player = player_scene.instance() as Player
 	player.set_network_master(player_id)
 	player.name = str(player_id)
-	get_tree().get_root().add_child(player)
+	player.call_deferred("set_body_position", spawn.position)
+	root.add_child(player)
 	# if I'm the server I inform the new connected player about the others
 	if get_tree().get_network_unique_id() == 1:
 		if player_id != 1:

@@ -1,50 +1,38 @@
 extends Line2D
 
-export var global_points = PoolVector2Array()
 export var length = 100
 
 func _ready():
 	rset_config("points", MultiplayerAPI.RPC_MODE_REMOTE)
 	rset_config("visible", MultiplayerAPI.RPC_MODE_REMOTE)
-	_update_points()
+	add_point(Vector2.ZERO)
 
 func _process(delta):
-	_update_points()
 	if is_network_master():
 		rset("visible", visible)
-	
-func _update_points():
-	clear_points()
-	for p in global_points:
-		add_point(to_local(p))
-	add_point(position)
-
-func push(position):
-	var result = global_points.push_back(position)
-	_update_points()
-	if is_network_master():
 		rset("points", points)
+		
+func push(point):
+	add_point(point, 1)
 
 func pop():
-	global_points.remove(global_points.size() - 1)
-	_update_points()
-	if is_network_master():
-		rset("points", points)
-
-func reset():
-	global_points.resize(0)
-	clear_points()
-	if is_network_master():
-		rset("points", points)
+	remove_point(1)
 
 func pivot():
-	return global_points[global_points.size() - 1]
+	return points[1]
 
 func is_tethered():
-	return global_points.size() > 0
+	return points.size() > 1
 
 func previous_pivot():
-	var size = global_points.size()
-	if size > 1:
-		return global_points[size - 2]
+	var size = points.size()
+	if size > 2:
+		return points[2]
 		
+func update_body_pos(pos):
+	set_point_position(0, pos)
+
+func reset():
+	var body_pos = points[0]
+	clear_points()
+	add_point(body_pos)

@@ -1,75 +1,85 @@
-extends KinematicBody2D
+extends Node2D
+
+class_name Player
 
 export var gravity = 12.5
 export var move_speed = 10
-export var ground_drag = 0.8
-export var air_drag = 1
 export var velocity_input_threshold = Vector2(300, 300)
 
-export var rope_shoot_angle = PI/4
 export var max_rope_length = 300
+export var rope_shoot_angle = PI/4
+export var rope_shot_speed = 20
+var rope_shot_length = 0
 
-var acceleration = Vector2()
-var velocity = Vector2()
-var angular_velocity = 0
-
-onready var start_time = OS.get_ticks_msec()
-
+onready var body = $Body
 onready var states: FSM = $States as FSM
-onready var sprite = $Sprite
+onready var sprite = $Body/Sprite
 onready var rope = $Rope
+onready var rope_shot = $RopeShot
 
-func _ready():
-	rset_config("velocity", MultiplayerAPI.RPC_MODE_REMOTE)
-	rset_config("position", MultiplayerAPI.RPC_MODE_REMOTE)
-	rset_config("rotation", MultiplayerAPI.RPC_MODE_REMOTE)
-	
+func _ready():	
 	yield(get_tree().create_timer(0.01), "timeout")
-	shoot_rope()
+	#shoot_rope()
 
-func _physics_process(delta):
-	if velocity.x != 0:
-		sprite.flip_h = velocity.x < 0
-	
-	if is_network_master():
-		rset("velocity", velocity)
-		rset("position", position)
-		rset("rotation", rotation)
+func _process(delta):
+	rope.update_body_pos(body.position)
+	if body.velocity.x != 0:
+		sprite.flip_h = body.velocity.x < 0
+		
+func set_body_position(pos):
+	body.position = pos
 	
 func shoot_rope():
-	var rope_v = Vector2.UP.rotated(rope_shoot_angle) * max_rope_length
+	rope_shot.show()
+	rope_shot.add_point(body.position)
+	rope_shot.add_point(body.position)
 	var space_state = get_world_2d().direct_space_state
-	var result = space_state.intersect_ray(position, position + rope_v, [self])
-
-	if result:
-		rope.reset()
-		rope.length = position.distance_to(result.position)
-		rope.push(result.position)
-		states.go_to("Tethered")
+	
+	while rope_shot_length <= max_rope_length and states.current_state.name == "Falling":
+		var rope_v = Vector2.UP.rotated(rope_shoot_angle) * rope_shot_length
+		rope_shot.set_point_position(0, body.position)
+		rope_shot.set_point_position(1, body.position + rope_v)
+		
+		var result = space_state.intersect_ray(body.position, body.position + rope_v, [body])
+	
+		if result:
+			rope.reset()
+			rope.length = body.position.distance_to(result.position)
+			rope.push(result.position)
+			print(rope.points)
+			rope_shot_length = 0
+			states.go_to("Tethered")
+			break
+			
+		rope_shot_length += rope_shot_speed
+		yield(get_tree(), "idle_frame")
+	
+	rope_shot_length = 0
+	rope_shot.clear_points()
+	rope_shot.hide()
 
 func normal_movement(delta, drag):
-	var apply_drag = false
-	acceleration = Vector2.DOWN * gravity
+	body.acceleration = Vector2.DOWN * gravity
 	
-	if false and is_network_master():
+	if is_network_master():
 		var move_direction = get_move_direction()
 		var move_force = move_direction * Vector2.RIGHT * move_speed
 		
-		acceleration += move_force
-		velocity += acceleration
+		body.acceleration += move_force
+		body.velocity += body.acceleration
 		
-		if abs(velocity.x) > velocity_input_threshold.x:
-			velocity.x -= move_force.x
+		if abs(body.velocity.x) > velocity_input_threshold.x:
+			body.velocity.x -= move_force.x
 	
-		if abs(velocity.y) > velocity_input_threshold.y:
-			velocity.y -= move_force.y
+		if abs(body.velocity.y) > velocity_input_threshold.y:
+			body.velocity.y -= move_force.y
 	
-		if sign(move_direction.x) != sign(velocity.x):
-			velocity.x *= drag
+		if sign(move_direction.x) != sign(body.velocity.x):
+			body.velocity.x *= drag
 	else:
-		velocity += acceleration
+		body.velocity += body.acceleration
 
-	velocity = move_and_slide_with_snap(velocity, Vector2.DOWN, Vector2.UP)
+	body.velocity = body.move_and_slide_with_snap(body.velocity, Vector2.DOWN, Vector2.UP)
 
 func get_move_direction() -> Vector2:
 	return Vector2(
