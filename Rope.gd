@@ -19,14 +19,14 @@ func pop():
 	remove_point(1)
 
 func pivot():
-	return points[1]
+	if points.size() > 1:
+		return points[1]
 
 func is_tethered():
 	return points.size() > 1
 
 func previous_pivot():
-	var size = points.size()
-	if size > 2:
+	if points.size() > 2:
 		return points[2]
 		
 func update_body_pos(pos):

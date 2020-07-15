@@ -15,10 +15,10 @@ __meta__ = {
 }
 
 [node name="Address" type="LineEdit" parent="."]
-margin_left = 411.104
-margin_top = 250.79
-margin_right = 652.104
-margin_bottom = 274.79
+margin_left = 836.42
+margin_top = 484.669
+margin_right = 1077.42
+margin_bottom = 508.669
 text = "127.0.0.1"
 placeholder_text = "IP Address"
 caret_blink = true
@@ -27,10 +27,10 @@ __meta__ = {
 }
 
 [node name="Buttons" type="HBoxContainer" parent="."]
-margin_left = 412.104
-margin_top = 283.79
-margin_right = 653.104
-margin_bottom = 303.79
+margin_left = 837.42
+margin_top = 517.669
+margin_right = 1078.42
+margin_bottom = 537.669
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
