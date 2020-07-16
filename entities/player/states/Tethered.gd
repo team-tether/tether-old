@@ -91,7 +91,7 @@ func on_physics_process(player: Player, delta):
 		var query = Physics2DShapeQueryParameters.new()
 		query.set_shape(shape)
 		query.set_exclude([player.body])
-		query.margin = -10
+#		query.margin = -2
 		var res = ss.intersect_shape(query)
 		if !res:
 			player.rope.pop()
