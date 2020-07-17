@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://entities/player/player.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/states/Falling.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://entities/player/PlayerBody.gd" type="Script" id=8]
 [ext_resource path="res://entities/player/RopeShot.gd" type="Script" id=9]
 [ext_resource path="res://entities/player/states/WallSliding.gd" type="Script" id=10]
+[ext_resource path="res://entities/player/Camera2D.gd" type="Script" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.8425
@@ -27,7 +28,12 @@ collision_layer = 2
 script = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="Body"]
+limit_left = -2000
+limit_top = -2000
+limit_right = 2000
+limit_bottom = 2000
 smoothing_enabled = true
+script = ExtResource( 11 )
 
 [node name="Sprite" type="Sprite" parent="Body"]
 scale = Vector2( 0.5, 0.5 )
