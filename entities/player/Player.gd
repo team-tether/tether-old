@@ -14,10 +14,14 @@ var rope_shot_length = 0
 onready var body = $Body
 onready var states: FSM = $States as FSM
 onready var sprite = $Body/Sprite
+onready var camera = $Body/Camera2D
+
+onready var left_wall_ray = $Body/LeftWallRay
+onready var right_wall_ray = $Body/RightWallRay
+
 onready var rope = $Rope
 onready var rope_shot = $RopeShot
 onready var rope_shot_ray = $RopeShotRay
-onready var camera = $Body/Camera2D
 
 func _ready():
 	if is_network_master():
@@ -32,6 +36,14 @@ func _process(delta):
 
 func set_body_position(pos):
 	body.position = pos
+	
+func wall_rays_normal():
+	if left_wall_ray.is_colliding():
+		return left_wall_ray.get_collision_normal()
+	
+	if right_wall_ray.is_colliding():
+		return right_wall_ray.get_collision_normal()
+	
 	
 func shoot_rope():
 	rope_shot.show()
@@ -62,29 +74,9 @@ func shoot_rope():
 	rope_shot_length = 0
 	rope_shot.clear_points()
 	rope_shot.hide()
-
-func normal_movement(delta, drag):
+	
+func _physics_process(_delta):
 	body.acceleration = Vector2.DOWN * gravity
-	
-	if is_network_master():
-		var move_direction = get_move_direction()
-		var move_force = move_direction * Vector2.RIGHT * move_speed
-		
-		body.acceleration += move_force
-		body.velocity += body.acceleration
-		
-		if abs(body.velocity.x) > velocity_input_threshold.x:
-			body.velocity.x -= move_force.x
-	
-		if abs(body.velocity.y) > velocity_input_threshold.y:
-			body.velocity.y -= move_force.y
-	
-		if sign(move_direction.x) != sign(body.velocity.x):
-			body.velocity.x *= drag
-	else:
-		body.velocity += body.acceleration
-
-	body.velocity = body.move_and_slide_with_snap(body.velocity, Vector2.DOWN, Vector2.UP)
 
 func get_move_direction() -> Vector2:
 	return Vector2(

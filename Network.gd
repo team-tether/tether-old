@@ -1,6 +1,6 @@
 extends Node
 
-const MAX_PLAYERS = 2
+const MAX_PLAYERS = 10
 const PORT = 1337
 var player_scene
 var players = []
@@ -8,7 +8,7 @@ var players = []
 func _ready():
 	player_scene = preload("res://entities/player/Player.tscn")
 	get_tree().connect("connected_to_server", self, "_connected_ok")
-#	call_deferred("on_host_game")
+	call_deferred("on_host_game")
 
 func on_host_game():
 	var host = NetworkedMultiplayerENet.new()
@@ -30,9 +30,7 @@ func _connected_ok():
 	
 	rpc("register_player", get_tree().get_network_unique_id())
 	register_player(get_tree().get_network_unique_id())
- 
-# this function is called when a new player is connected
-# note the use of the keyword remote which mean that the code will only be called on the others
+
 remote func register_player(player_id):
 	var root = get_tree().get_root()
 	var spawn = root.get_node("Game/Spawn")

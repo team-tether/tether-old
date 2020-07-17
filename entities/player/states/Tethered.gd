@@ -19,6 +19,7 @@ func on_exit(player):
 	var rope_flipped = (player.rope.pivot() - player.body.position).angle_to(player.body.velocity) > 0
 	player.body.angular_velocity = player.body.velocity.length() * .04 * (-1 if rope_flipped else 1)
 	player.rope.hide()
+	player.body.rotation = 0
 
 func on_physics_process(player: Player, delta):
 	if !is_network_master():
@@ -29,8 +30,6 @@ func on_physics_process(player: Player, delta):
 	var prev_pivot = player.rope.previous_pivot()
 	var to_pivot = player.body.position - pivot
 	var tangent = to_pivot.tangent().normalized()
-	
-	player.body.acceleration = Vector2.DOWN * player.gravity
 	
 	if move_direction.x != 0:
 			player.body.acceleration += Vector2(move_direction.x * speed, speed)
