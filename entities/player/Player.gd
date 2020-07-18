@@ -21,7 +21,7 @@ onready var right_wall_ray = $Body/RightWallRay
 
 onready var rope = $Rope
 onready var rope_shot = $RopeShot
-onready var rope_shot_ray = $RopeShotRay
+onready var rope_shot_ray: RayCast2D = $RopeShotRay
 
 func _ready():
 	if is_network_master():
@@ -61,9 +61,18 @@ func shoot_rope():
 	
 		if rope_shot_ray.is_colliding():
 			var point = rope_shot_ray.get_collision_point()
+			var normal = rope_shot_ray.get_collision_normal()
+			var collider = rope_shot_ray.get_collider()
+			
+			if collider is TileMap:
+				var tilemap: TileMap = collider as TileMap
+				var cell = tilemap.get_cellv(tilemap.world_to_map(point - normal))
+				if tilemap.tile_set.tile_get_name(cell) == "metal":
+					break
+			
 			rope.reset()
 			rope.length = body.position.distance_to(point)
-			rope.push(point + rope_shot_ray.get_collision_normal() + (body.position - point).normalized())
+			rope.push(point + normal + (body.position - point).normalized())
 			rope_shot_length = 0
 			states.go_to("Tethered")
 			break
