@@ -33,7 +33,24 @@ func _process(delta):
 	rope.update_body_pos(body.position)
 	if body.velocity.x != 0:
 		sprite.flip_h = body.velocity.x < 0
-
+	if Input.is_action_just_pressed("Respawn"):
+		die()
+		
+func die():
+	hide()
+	yield(get_tree().create_timer(0.5), "timeout")
+	spawn()
+	
+func spawn():
+	states.go_to("Falling")
+	var spawn = get_tree().root.get_node("Game/Spawn")
+	body.reset()
+	rope.reset()
+	body.position = spawn.position
+	rope_shoot_angle = -PI/4
+	show()
+	shoot_rope()
+	
 func set_body_position(pos):
 	body.position = pos
 	

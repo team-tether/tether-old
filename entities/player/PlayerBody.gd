@@ -14,3 +14,8 @@ func _physics_process(delta):
 		rset("velocity", velocity)
 		rset("position", position)
 #		rset("rotation", rotation)
+
+func reset():
+	acceleration = Vector2.ZERO
+	velocity = Vector2.ZERO
+	angular_velocity = 0
