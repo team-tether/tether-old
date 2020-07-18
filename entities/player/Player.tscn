@@ -28,11 +28,8 @@ collision_layer = 2
 script = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="Body"]
-limit_left = -2000
-limit_top = -2000
-limit_right = 2000
-limit_bottom = 2000
 smoothing_enabled = true
+editor_draw_limits = true
 script = ExtResource( 11 )
 
 [node name="Sprite" type="Sprite" parent="Body"]
@@ -52,13 +49,14 @@ cast_to = Vector2( -10, 0 )
 
 [node name="Rope" type="Line2D" parent="."]
 visible = false
-width = 1.0
+points = PoolVector2Array( 10967.2, -1949.13 )
+width = 3.0
 default_color = Color( 1, 1, 1, 1 )
 script = ExtResource( 6 )
 
 [node name="RopeShot" type="Line2D" parent="."]
 visible = false
-width = 2.0
+width = 3.0
 default_color = Color( 1, 1, 1, 1 )
 script = ExtResource( 9 )
 
