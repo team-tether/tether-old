@@ -66,6 +66,8 @@ func wall_rays_normal():
 	
 func shoot_rope():
 	if is_shooting_rope:
+		is_shooting_rope = false
+		rope_shoot_angle = -rope_shoot_angle
 		return
 	
 	is_shooting_rope = true
@@ -73,7 +75,7 @@ func shoot_rope():
 	rope_shot.add_point(body.position)
 	rope_shot.add_point(body.position)
 	
-	while rope_shot_length <= max_rope_length and states.current_state.name == "Falling":
+	while is_shooting_rope and rope_shot_length <= max_rope_length and states.current_state.name == "Falling":
 		var rope_v = Vector2.UP.rotated(rope_shoot_angle) * rope_shot_length
 		rope_shot.set_point_position(0, body.position)
 		rope_shot.set_point_position(1, body.position + rope_v)
