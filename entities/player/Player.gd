@@ -8,7 +8,7 @@ export var velocity_input_threshold = Vector2(300, 300)
 var angular_velocity = 0
 
 export var max_rope_length = 300
-export var rope_shoot_angle = -PI/4
+export var rope_shot_angle = -PI/4
 export var rope_shot_speed = 20
 var rope_shot_length = 0
 var is_shooting_rope = false
@@ -49,7 +49,7 @@ func spawn():
 	body.reset()
 	rope.reset()
 	body.position = spawn.position
-	rope_shoot_angle = -PI/4
+	rope_shot_angle = -PI/4
 	show()
 	shoot_rope()
 	
@@ -67,7 +67,7 @@ func wall_rays_normal():
 func shoot_rope():
 	if is_shooting_rope:
 		is_shooting_rope = false
-		rope_shoot_angle = -rope_shoot_angle
+		rope_shot_angle = -rope_shot_angle
 		return
 	
 	is_shooting_rope = true
@@ -76,7 +76,7 @@ func shoot_rope():
 	rope_shot.add_point(body.position)
 	
 	while is_shooting_rope and rope_shot_length <= max_rope_length and states.current_state.name == "Falling":
-		var rope_v = Vector2.UP.rotated(rope_shoot_angle) * rope_shot_length
+		var rope_v = Vector2.UP.rotated(rope_shot_angle) * rope_shot_length
 		rope_shot.set_point_position(0, body.position)
 		rope_shot.set_point_position(1, body.position + rope_v)
 		

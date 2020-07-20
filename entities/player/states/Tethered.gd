@@ -2,7 +2,7 @@ extends State
 
 export var speed = 15
 export var drag = 0.99
-export var max_rope_shoot_angle = PI/4
+export var max_rope_shot_angle = PI/4
 export var rope_length_speed = 200
 export var restitution = 1
 export var active_restitution = 1.3
@@ -97,7 +97,7 @@ func on_physics_process(player: Player, delta):
 
 	var resulting_to_pivot = player.body.position - player.rope.pivot()
 	player.rope.length = resulting_to_pivot.length()
-	player.rope_shoot_angle = clamp(to_pivot.angle_to(Vector2.DOWN), -max_rope_shoot_angle, max_rope_shoot_angle)
+	player.rope_shot_angle = clamp(to_pivot.angle_to(Vector2.DOWN), -max_rope_shot_angle, max_rope_shot_angle)
 	
 	if is_network_master() and Input.is_action_just_pressed("toggle_rope"):
 		go_to("Falling")

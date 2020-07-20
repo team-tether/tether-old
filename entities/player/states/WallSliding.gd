@@ -18,3 +18,4 @@ func on_physics_process(player, delta):
 
 	if is_network_master() and Input.is_action_just_pressed("jump"):
 		player.body.velocity = (wall_normal * jump_force) + (Vector2.UP * jump_force)
+		player.rope_shot_angle = wall_normal.x * abs(player.rope_shot_angle)
