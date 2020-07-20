@@ -36,12 +36,13 @@ func on_physics_process(player: Player, delta):
 	
 	player.body.velocity += player.body.acceleration
 	player.body.velocity = tangent * player.body.velocity.dot(tangent) * drag
-	player.body.velocity = player.body.velocity.clamped(max_velocity_mag)
 	
 	if move_direction.y != 0:
 		var new_rope_length = player.rope.length + move_direction.y * rope_length_speed * delta
 		player.body.velocity *= pow(player.rope.length / new_rope_length, 1)
 		player.rope.length = new_rope_length
+		
+	player.body.velocity = player.body.velocity.clamped(max_velocity_mag)
 	
 	var new_position = player.body.position + (player.body.velocity * delta)
 	var new_to_pivot = new_position - pivot
@@ -53,6 +54,7 @@ func on_physics_process(player: Player, delta):
 	
 	if move_result:
 		player.body.velocity = -player.body.velocity * (active_restitution if move_direction.x != 0 else restitution)
+		player.body.velocity = player.body.velocity.clamped(max_velocity_mag)
 		
 	player.sprite.rotation = -to_pivot.angle_to(Vector2.DOWN)
 	
