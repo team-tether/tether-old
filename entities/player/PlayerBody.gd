@@ -1,21 +1,13 @@
 extends KinematicBody2D
 
-var acceleration = Vector2()
-var velocity = Vector2()
-var angular_velocity = 0
-
-func _ready():
-	rset_config("velocity", MultiplayerAPI.RPC_MODE_REMOTE)
-	rset_config("position", MultiplayerAPI.RPC_MODE_REMOTE)
-#	rset_config("rotation", MultiplayerAPI.RPC_MODE_REMOTE)
+remote var acceleration = Vector2()
+remote var velocity = Vector2()
 
 func _physics_process(delta):
 	if is_network_master():
-		rset("velocity", velocity)
-		rset("position", position)
-#		rset("rotation", rotation)
+		rset_unreliable("velocity", velocity)
+		rset_unreliable("position", position)
 
 func reset():
 	acceleration = Vector2.ZERO
 	velocity = Vector2.ZERO
-	angular_velocity = 0

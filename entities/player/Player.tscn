@@ -10,7 +10,7 @@
 [ext_resource path="res://entities/player/PlayerBody.gd" type="Script" id=8]
 [ext_resource path="res://entities/player/RopeShot.gd" type="Script" id=9]
 [ext_resource path="res://entities/player/states/WallSliding.gd" type="Script" id=10]
-[ext_resource path="res://entities/player/Camera2D.gd" type="Script" id=11]
+[ext_resource path="res://entities/player/Camera.gd" type="Script" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.8425

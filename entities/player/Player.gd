@@ -5,11 +5,13 @@ class_name Player
 export var gravity = 12.5
 export var move_speed = 10
 export var velocity_input_threshold = Vector2(300, 300)
+var angular_velocity = 0
 
 export var max_rope_length = 300
 export var rope_shoot_angle = -PI/4
 export var rope_shot_speed = 20
 var rope_shot_length = 0
+var is_shooting_rope = false
 
 onready var body = $Body
 onready var states: FSM = $States as FSM
@@ -63,6 +65,10 @@ func wall_rays_normal():
 	
 	
 func shoot_rope():
+	if is_shooting_rope:
+		return
+	
+	is_shooting_rope = true
 	rope_shot.show()
 	rope_shot.add_point(body.position)
 	rope_shot.add_point(body.position)
@@ -100,6 +106,7 @@ func shoot_rope():
 	rope_shot_length = 0
 	rope_shot.clear_points()
 	rope_shot.hide()
+	is_shooting_rope = false
 	
 func _physics_process(_delta):
 	body.acceleration = Vector2.DOWN * gravity

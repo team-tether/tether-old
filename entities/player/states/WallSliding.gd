@@ -3,7 +3,7 @@ extends "./Platforming.gd"
 export var jump_force = Vector2(300, 400)
 
 func on_enter(player):
-	player.body.rotation = 0
+	player.sprite.rotation = 0
 
 func on_physics_process(player, delta):
 	.on_physics_process(player, delta)
