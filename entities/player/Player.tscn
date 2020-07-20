@@ -77,7 +77,6 @@ target = NodePath("..")
 [node name="Tethered" type="Node" parent="States"]
 script = ExtResource( 4 )
 speed = 10
-max_velocity_mag = 800
 
 [node name="Falling" type="Node" parent="States"]
 script = ExtResource( 2 )

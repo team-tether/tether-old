@@ -75,7 +75,7 @@ func shoot_rope():
 	rope_shot.add_point(body.position)
 	rope_shot.add_point(body.position)
 	
-	while is_shooting_rope and rope_shot_length <= max_rope_length and states.current_state.name == "Falling":
+	while is_shooting_rope and rope_shot_length <= max_rope_length:# and states.current_state.name == "Falling":
 		var rope_v = Vector2.UP.rotated(rope_shot_angle) * rope_shot_length
 		rope_shot.set_point_position(0, body.position)
 		rope_shot.set_point_position(1, body.position + rope_v)
