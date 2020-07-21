@@ -1,7 +1,7 @@
 extends Camera2D
 
 func _ready():
-	var tm: TileMap = get_tree().get_root().get_node("Game/TileMap")
+	var tm: TileMap = get_tree().get_root().get_node("Game/Level/TileMap")
 	var rect = tm.get_used_rect()
 	
 	var pos = tm.map_to_world(rect.position)

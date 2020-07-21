@@ -5,7 +5,7 @@
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=3]
 [ext_resource path="res://entities/player/states/Tethered.gd" type="Script" id=4]
 [ext_resource path="res://addons/node_fsm_plugin/fsm_node.gd" type="Script" id=5]
-[ext_resource path="res://Rope.gd" type="Script" id=6]
+[ext_resource path="res://entities/player/Rope.gd" type="Script" id=6]
 [ext_resource path="res://entities/player/states/Running.gd" type="Script" id=7]
 [ext_resource path="res://entities/player/PlayerBody.gd" type="Script" id=8]
 [ext_resource path="res://entities/player/RopeShot.gd" type="Script" id=9]
@@ -50,13 +50,13 @@ cast_to = Vector2( -10, 0 )
 [node name="Rope" type="Line2D" parent="."]
 visible = false
 points = PoolVector2Array( 10967.2, -1949.13 )
-width = 3.0
+width = 2.0
 default_color = Color( 1, 1, 1, 1 )
 script = ExtResource( 6 )
 
 [node name="RopeShot" type="Line2D" parent="."]
 visible = false
-width = 3.0
+width = 2.0
 default_color = Color( 1, 1, 1, 1 )
 script = ExtResource( 9 )
 

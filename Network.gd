@@ -4,11 +4,11 @@ const MAX_PLAYERS = 10
 const PORT = 1337
 var player_scene
 var players = []
+var connected = false
 
 func _ready():
 	player_scene = preload("res://entities/player/Player.tscn")
 	get_tree().connect("connected_to_server", self, "_connected_ok")
-	call_deferred("on_host_game")
 
 func on_host_game():
 	var host = NetworkedMultiplayerENet.new()
@@ -22,12 +22,8 @@ func on_join_game(ip):
 	host.create_client(ip, PORT)
 	get_tree().set_network_peer(host)
 
-
 func _connected_ok():
-	var stage = load("res://Game.tscn").instance()
-	get_tree().get_root().add_child(stage)
-	get_tree().get_root().get_node("Lobby").queue_free()
-	
+	connected = true
 	rpc("register_player", get_tree().get_network_unique_id())
 	register_player(get_tree().get_network_unique_id())
 

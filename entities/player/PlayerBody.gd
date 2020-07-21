@@ -3,8 +3,8 @@ extends KinematicBody2D
 remote var acceleration = Vector2()
 remote var velocity = Vector2()
 
-func _physics_process(delta):
-	if is_network_master():
+func _physics_process(_delta):
+	if Network.connected and is_network_master():
 		rset_unreliable("velocity", velocity)
 		rset_unreliable("position", position)
 

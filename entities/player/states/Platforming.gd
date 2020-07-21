@@ -4,8 +4,8 @@ export(float) var drag = 0.95
 export(float) var move_speed = 10
 export var velocity_input_threshold = Vector2(500, 500)
 
-func on_physics_process(player, delta):
-	if is_network_master():
+func on_physics_process(player, _delta):
+	if !Network.connected or is_network_master():
 		var move_direction = Input.get_action_strength("right") - Input.get_action_strength("left")
 		var move_force = Vector2.RIGHT * move_direction * move_speed
 		
