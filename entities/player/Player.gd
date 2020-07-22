@@ -37,7 +37,6 @@ func _process(_delta):
 	if rope_shot.visible:
 		rope_shot.set_point_position(0, body.position)
 		rope_shot.set_point_position(1, body.position + rope_shot_ray.cast_to)
-		print(rope_shot.points.size())
 	
 	if body.velocity.x != 0:
 		sprite.flip_h = body.velocity.x < 0

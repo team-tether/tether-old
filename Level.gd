@@ -4,7 +4,7 @@ onready var spawn = $Spawn
 var player_scene
 
 func _ready():
-	player_scene = preload("res://entities/player/Player.tscn")
+	player_scene = load("res://entities/player/Player.tscn")
 	
 	var player = player_scene.instance() as Player
 	player.set_network_master(0)
