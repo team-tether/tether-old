@@ -26,10 +26,8 @@ onready var rope_shot = $RopeShot
 onready var rope_shot_ray: RayCast2D = $RopeShotRay
 
 func _ready():
-	if !Network.connected or is_network_master():
-		camera.current = true
-#		yield(get_tree().create_timer(0.01), "timeout")
-		spawn()
+#	yield(get_tree().create_timer(0.01), "timeout")
+	spawn()
 
 func _process(_delta):
 	rope.update_body_pos(body.position)
@@ -50,7 +48,7 @@ func die():
 	
 func spawn():
 	states.go_to("Falling")
-	var spawn = get_tree().root.get_node("Game/Level/Spawn")
+	var spawn = get_node("../Spawn")
 	body.reset()
 	rope.reset()
 	body.position = spawn.position

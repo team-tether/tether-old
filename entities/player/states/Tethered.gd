@@ -22,9 +22,6 @@ func on_exit(player):
 	player.sprite.rotation = 0
 
 func on_physics_process(player: Player, delta):
-	if Network.connected and !is_network_master():
-		return
-
 	var move_direction = player.get_move_direction()
 	var pivot = player.rope.pivot()
 	var to_pivot = player.body.position - pivot
@@ -100,7 +97,7 @@ func on_physics_process(player: Player, delta):
 	player.rope.length = resulting_to_pivot.length()
 	player.rope_shot_angle = clamp(to_pivot.angle_to(Vector2.DOWN), -max_rope_shot_angle, max_rope_shot_angle)
 	
-	if (!Network.connected or is_network_master()) and Input.is_action_just_pressed("toggle_rope"):
+	if Input.is_action_just_pressed("toggle_rope"):
 		go_to("Falling")
 	
 
