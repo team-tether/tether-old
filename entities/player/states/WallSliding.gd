@@ -1,6 +1,5 @@
-extends "./Platforming.gd"
+extends "./Untethered.gd"
 
-export var jump_force = Vector2(300, 400)
 
 func on_enter(player):
 	player.sprite.rotation = 0
@@ -11,11 +10,7 @@ func on_physics_process(player, delta):
 	var wall_normal = player.wall_rays_normal()
 	
 	if player.body.is_on_floor():
-		return go_to("Running")		
+		return go_to("Grounded")
 	
 	if !wall_normal:
 		return go_to("Falling")
-
-	if Input.is_action_just_pressed("jump"):
-		player.body.velocity = (wall_normal * jump_force) + (Vector2.UP * jump_force)
-		player.rope_shot_angle = wall_normal.x * abs(player.rope_shot_angle)

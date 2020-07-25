@@ -1,4 +1,4 @@
-extends "./Platforming.gd"
+extends "./Untethered.gd"
 
 export var angular_drag = 1
 
@@ -9,7 +9,7 @@ func on_physics_process(player, delta):
 	.on_physics_process(player, delta)
 	
 	if player.body.is_on_floor():
-		go_to("Running")
+		go_to("Grounded")
 		
 	if player.wall_rays_normal():
 		go_to("WallSliding")

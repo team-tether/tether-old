@@ -6,7 +6,7 @@
 [ext_resource path="res://entities/player/states/Tethered.gd" type="Script" id=4]
 [ext_resource path="res://addons/node_fsm_plugin/fsm_node.gd" type="Script" id=5]
 [ext_resource path="res://entities/player/Rope.gd" type="Script" id=6]
-[ext_resource path="res://entities/player/states/Running.gd" type="Script" id=7]
+[ext_resource path="res://entities/player/states/Grounded.gd" type="Script" id=7]
 [ext_resource path="res://entities/player/PlayerBody.gd" type="Script" id=8]
 [ext_resource path="res://entities/player/states/WallSliding.gd" type="Script" id=10]
 [ext_resource path="res://entities/player/Camera.gd" type="Script" id=11]
@@ -68,7 +68,6 @@ cast_to = Vector2( 100, -100 )
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 5 )
-active = true
 initial_state = "Falling"
 target = NodePath("..")
 
@@ -78,13 +77,10 @@ speed = 10
 
 [node name="Falling" type="Node" parent="States"]
 script = ExtResource( 2 )
-drag = 1.0
-velocity_input_threshold = Vector2( 400, 400 )
 
-[node name="Running" type="Node" parent="States"]
+[node name="Grounded" type="Node" parent="States"]
 script = ExtResource( 7 )
-drag = 0.9
-jump_force = -300.0
 
 [node name="WallSliding" type="Node" parent="States"]
 script = ExtResource( 10 )
+drag = Vector2( 1, 0.8 )

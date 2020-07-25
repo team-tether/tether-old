@@ -49,7 +49,7 @@ func _ready():
 		.setDescription('Lists all levels')\
 		.register()
 
-func _on_Area2D_body_entered(body):
+func _on_Death_body_entered(body):
 	var parent = body.get_parent()
 	if parent is Player:
 		var player = parent as Player

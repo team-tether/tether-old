@@ -2,10 +2,7 @@ extends Node2D
 
 class_name Player
 
-export var gravity = 12.5
-export var move_speed = 10
-export var velocity_input_threshold = Vector2(300, 300)
-var angular_velocity = 0
+var angular_velocity: float = 0
 
 export var max_rope_length = 300
 export var rope_shot_angle = -PI/4
@@ -26,7 +23,6 @@ onready var rope_shot = $RopeShot
 onready var rope_shot_ray: RayCast2D = $RopeShotRay
 
 func _ready():
-#	yield(get_tree().create_timer(0.01), "timeout")
 	spawn()
 
 func _process(_delta):
@@ -38,9 +34,10 @@ func _process(_delta):
 	
 	if body.velocity.x != 0:
 		sprite.flip_h = body.velocity.x < 0
+
 	if Input.is_action_just_pressed("respawn"):
 		die()
-		
+
 func die():
 	hide()
 	yield(get_tree().create_timer(0.5), "timeout")
@@ -66,8 +63,8 @@ func wall_rays_normal():
 	
 func shoot_rope():
 	if is_shooting_rope:
-		is_shooting_rope = false
-		rope_shot_angle = -rope_shot_angle
+#		is_shooting_rope = false
+#		rope_shot_angle = -rope_shot_angle
 		return
 	
 	is_shooting_rope = true
@@ -106,9 +103,6 @@ func shoot_rope():
 	rope_shot.clear_points()
 	rope_shot.hide()
 	is_shooting_rope = false
-	
-func _physics_process(_delta):
-	body.acceleration = Vector2.DOWN * gravity
 
 func get_move_direction() -> Vector2:
 	return Vector2(
