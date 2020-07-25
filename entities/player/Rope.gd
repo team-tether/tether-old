@@ -4,7 +4,7 @@ export var length = 100
 
 func _ready():
 	add_point(Vector2.ZERO)
-		
+	
 func push(point):
 	add_point(point, 1)
 

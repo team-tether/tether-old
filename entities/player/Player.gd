@@ -1,55 +1,72 @@
-extends Node2D
-
+extends KinematicBody2D
 class_name Player
 
-var angular_velocity: float = 0
+
+export var gravity = 12.5
+export var starting_acceleration = Vector2.ZERO
+export var starting_velocity = Vector2.ZERO
+export var starting_angular_velocity: float = 0
+var starting_position: Vector2
+
+var acceleration = starting_acceleration
+var velocity = starting_velocity
+var angular_velocity = starting_angular_velocity
 
 export var max_rope_length = 300
-export var rope_shot_angle = -PI/4
+export var rope_shot_angle = PI/4
 export var rope_shot_speed = 20
 var rope_shot_length = 0
 var is_shooting_rope = false
 
-onready var body = $Body
 onready var states: FSM = $States as FSM
-onready var sprite = $Body/Sprite
-onready var camera = $Body/Camera2D
+onready var sprite = $Sprite
+onready var camera = $Camera2D
 
-onready var left_wall_ray = $Body/LeftWallRay
-onready var right_wall_ray = $Body/RightWallRay
+onready var left_wall_ray = $LeftWallRay
+onready var right_wall_ray = $RightWallRay
 
 onready var rope = $Rope
 onready var rope_shot = $RopeShot
 onready var rope_shot_ray: RayCast2D = $RopeShotRay
 
 func _ready():
-	spawn()
+	starting_position = position
+	
+	remove_child(rope)
+	get_parent().call_deferred("add_child", rope)
+	
+	shoot_rope()
 
 func _process(_delta):
-	rope.update_body_pos(body.position)
+	rope.update_body_pos(position)
 	
 	if rope_shot.visible:
-		rope_shot.set_point_position(0, body.position)
-		rope_shot.set_point_position(1, body.position + rope_shot_ray.cast_to)
+		rope_shot.set_point_position(1, rope_shot_ray.cast_to)
 	
-	if body.velocity.x != 0:
-		sprite.flip_h = body.velocity.x < 0
+	if velocity.x != 0:
+		sprite.flip_h = velocity.x < 0
 
 	if Input.is_action_just_pressed("respawn"):
 		die()
 
+func _physics_process(_delta):
+	acceleration = Vector2.DOWN * gravity
+	velocity += acceleration
+	
+func reset():
+	states.go_to("Falling")
+	acceleration = starting_acceleration
+	velocity = starting_velocity
+	position = starting_position
+	angular_velocity = starting_angular_velocity
+	rope.reset()
+	rope_shot_angle = PI/4
+	is_shooting_rope = false
+
 func die():
 	hide()
-	yield(get_tree().create_timer(0.5), "timeout")
-	spawn()
-	
-func spawn():
-	states.go_to("Falling")
-	var spawn = get_node("../Spawn")
-	body.reset()
-	rope.reset()
-	body.position = spawn.position
-	rope_shot_angle = -PI/4
+	reset()
+	yield(get_tree().create_timer(0.25), "timeout")
 	show()
 	shoot_rope()
 	
@@ -63,18 +80,16 @@ func wall_rays_normal():
 	
 func shoot_rope():
 	if is_shooting_rope:
-#		is_shooting_rope = false
-#		rope_shot_angle = -rope_shot_angle
 		return
 	
+	rope_shot_length = 0
 	is_shooting_rope = true
 	rope_shot.show()
-	rope_shot.add_point(body.position)
-	rope_shot.add_point(body.position)
+	rope_shot.add_point(Vector2.ZERO)
+	rope_shot.add_point(Vector2.ZERO)
 	
-	while is_shooting_rope and rope_shot_length <= max_rope_length:# and states.current_state.name == "Falling":
+	while is_shooting_rope and rope_shot_length <= max_rope_length and states.current_state.name == "Falling":
 		var rope_v = Vector2.UP.rotated(rope_shot_angle) * rope_shot_length
-		rope_shot_ray.position = body.position
 		rope_shot_ray.cast_to = rope_v
 		rope_shot_ray.force_raycast_update()
 	
@@ -90,8 +105,8 @@ func shoot_rope():
 					break
 			
 			rope.reset()
-			rope.length = body.position.distance_to(point)
-			rope.push(point + normal + (body.position - point).normalized())
+			rope.length = position.distance_to(point)
+			rope.push(point + normal + (position - point).normalized())
 			rope_shot_length = 0
 			states.go_to("Tethered")
 			break

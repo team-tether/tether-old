@@ -6,5 +6,5 @@ func on_enter(player):
 func on_physics_process(player, delta):
 	.on_physics_process(player, delta)
 
-	if !player.body.is_on_floor():
+	if !player.is_on_floor():
 		go_to("Falling")

@@ -8,7 +8,7 @@ func on_exit(player):
 func on_physics_process(player, delta):
 	.on_physics_process(player, delta)
 	
-	if player.body.is_on_floor():
+	if player.is_on_floor():
 		go_to("Grounded")
 		
 	if player.wall_rays_normal():
