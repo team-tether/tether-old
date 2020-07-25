@@ -13,9 +13,10 @@ var velocity = starting_velocity
 var angular_velocity = starting_angular_velocity
 
 export var max_rope_length = 300
-export var rope_shot_angle = PI/4
+export var max_rope_shot_angle = PI/4
+export var rope_shot_angle = PI/4 setget set_rope_shot_angle
 export var rope_shot_speed = 20
-var rope_shot_length = 0
+var rope_shot_length = 0.0
 var is_shooting_rope = false
 
 onready var states: FSM = $States as FSM
@@ -28,6 +29,11 @@ onready var right_wall_ray = $RightWallRay
 onready var rope = $Rope
 onready var rope_shot = $RopeShot
 onready var rope_shot_ray: RayCast2D = $RopeShotRay
+
+onready var rope_direction_indicator = $RopeDirectionIndicator
+
+func set_rope_shot_angle(angle):
+	rope_shot_angle = clamp(angle, -max_rope_shot_angle, max_rope_shot_angle)
 
 func _ready():
 	starting_position = position
@@ -42,9 +48,6 @@ func _process(_delta):
 	
 	if rope_shot.visible:
 		rope_shot.set_point_position(1, rope_shot_ray.cast_to)
-	
-	if velocity.x != 0:
-		sprite.flip_h = velocity.x < 0
 
 	if Input.is_action_just_pressed("respawn"):
 		die()
@@ -88,7 +91,7 @@ func shoot_rope():
 	rope_shot.add_point(Vector2.ZERO)
 	rope_shot.add_point(Vector2.ZERO)
 	
-	while is_shooting_rope and rope_shot_length <= max_rope_length and states.current_state.name == "Falling":
+	while is_shooting_rope and rope_shot_length <= max_rope_length and states.current_state.name != "Tethered":
 		var rope_v = Vector2.UP.rotated(rope_shot_angle) * rope_shot_length
 		rope_shot_ray.cast_to = rope_v
 		rope_shot_ray.force_raycast_update()
@@ -119,7 +122,7 @@ func shoot_rope():
 	rope_shot.hide()
 	is_shooting_rope = false
 
-func get_move_direction() -> Vector2:
+func input_direction() -> Vector2:
 	return Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")

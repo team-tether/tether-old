@@ -11,8 +11,8 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
-[node name="End" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1207.74, 384.666 )
-
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 620.12, 417.632 )
+
+[node name="End" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1207.74, 384.666 )

@@ -16,6 +16,3 @@ func on_physics_process(player, delta):
 		
 	player.angular_velocity *= angular_drag
 	player.sprite.rotation += player.angular_velocity * delta
-
-	if Input.is_action_just_pressed("toggle_rope"):
-		player.shoot_rope()
