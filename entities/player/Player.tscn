@@ -24,12 +24,12 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 29.2724, -23.927 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
 max_rope_length = 1000
+rope_shot_angle = 0.785398
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )

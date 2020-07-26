@@ -1,8 +1,7 @@
 extends KinematicBody2D
 class_name Player
 
-
-export var gravity = 12.5
+export var gravity = 10.5
 export var starting_acceleration = Vector2.ZERO
 export var starting_velocity = Vector2.ZERO
 export var starting_angular_velocity: float = 0
@@ -10,6 +9,7 @@ var starting_position: Vector2
 
 var acceleration = starting_acceleration
 var velocity = starting_velocity
+var prev_velocity = velocity
 var angular_velocity = starting_angular_velocity
 
 export var max_rope_length = 300
@@ -41,6 +41,7 @@ func _ready():
 	remove_child(rope)
 	get_parent().call_deferred("add_child", rope)
 	
+	yield(get_tree().create_timer(0.1), "timeout")
 	shoot_rope()
 
 func _process(_delta):
@@ -49,29 +50,10 @@ func _process(_delta):
 	if rope_shot.visible:
 		rope_shot.set_point_position(1, rope_shot_ray.cast_to)
 
-	if Input.is_action_just_pressed("respawn"):
-		die()
-
 func _physics_process(_delta):
+	prev_velocity = velocity
 	acceleration = Vector2.DOWN * gravity
 	velocity += acceleration
-	
-func reset():
-	states.go_to("Falling")
-	acceleration = starting_acceleration
-	velocity = starting_velocity
-	position = starting_position
-	angular_velocity = starting_angular_velocity
-	rope.reset()
-	rope_shot_angle = PI/4
-	is_shooting_rope = false
-
-func die():
-	hide()
-	reset()
-	yield(get_tree().create_timer(0.25), "timeout")
-	show()
-	shoot_rope()
 	
 func wall_rays_normal():
 	if left_wall_ray.is_colliding():
@@ -79,8 +61,7 @@ func wall_rays_normal():
 	
 	if right_wall_ray.is_colliding():
 		return right_wall_ray.get_collision_normal()
-	
-	
+
 func shoot_rope():
 	if is_shooting_rope:
 		return
