@@ -1,14 +1,11 @@
 extends Node2D
 class_name Level
 
-var player_scene = preload("res://entities/player/Player.tscn")
+export(String, FILE, "*.tscn") var next_level_path
+
 var death_particles_scene = preload("res://entities/DeathParticles.tscn")
 
-var player: Player
-onready var spawn = $Spawn
-
-func _ready():
-	spawn_player()
+onready var player: Player = $Player
 
 func _process(_delta):
 	if player and Input.is_action_just_pressed("respawn"):
@@ -17,22 +14,19 @@ func _process(_delta):
 func win():
 	print("good job!")
 	remove_player()
-	spawn_player()
+
+	if next_level_path:
+		SceneChanger.change_scene(next_level_path, 1.0)
 	
 func remove_player():
-	player.free()
-	get_node("Rope").free()
+	player.queue_free()
+	get_node("Rope").queue_free()
 
 func die():
 	spawn_death_particles()
 	remove_player()
-	yield(get_tree().create_timer(0.25), "timeout")
-	spawn_player()
-	
-func spawn_player():
-	player = player_scene.instance()
-	player.position = spawn.position
-	add_child(player)
+	get_tree().current_scene
+	SceneChanger.change_scene(filename, 0.5)
 	
 func spawn_death_particles():
 	var death_particles: Particles2D = death_particles_scene.instance()

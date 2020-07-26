@@ -917,12 +917,13 @@ resource_local_to_scene = true
 script = ExtResource( 5 )
 
 [node name="Level" instance=ExtResource( 1 )]
+next_level_path = "res://levels/1-1.tscn"
 
-[node name="Spawn" parent="." index="0"]
-position = Vector2( 544, 128 )
+[node name="Player" parent="." index="0"]
+position = Vector2( 506.328, 108.308 )
 
 [node name="End" parent="." index="1"]
-position = Vector2( 929.725, 381.812 )
+position = Vector2( 928.168, 387.284 )
 
 [node name="TileMap" parent="." index="2"]
 tile_set = SubResource( 95 )

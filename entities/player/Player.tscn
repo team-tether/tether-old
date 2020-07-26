@@ -40,7 +40,7 @@ shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 smoothing_enabled = true
-editor_draw_limits = true
+editor_draw_screen = false
 script = ExtResource( 11 )
 
 [node name="LeftWallRay" type="RayCast2D" parent="."]
@@ -64,10 +64,12 @@ width = 2.0
 default_color = Color( 1, 1, 1, 1 )
 
 [node name="RopeRay" type="RayCast2D" parent="."]
+visible = false
 enabled = true
 cast_to = Vector2( 100, -100 )
 
 [node name="RopeShotRay" type="RayCast2D" parent="."]
+visible = false
 enabled = true
 cast_to = Vector2( 100, -100 )
 

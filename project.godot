@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Tether"
-run/main_scene="res://levels/Test.tscn"
+run/main_scene="res://levels/1-1.tscn"
 boot_splash/image="res://entities/player/player.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
@@ -47,6 +47,7 @@ boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 [autoload]
 
 Game="*res://Game.gd"
+SceneChanger="*res://SceneChanger.tscn"
 Console="*res://addons/quentincaffeino-console/src/Console.tscn"
 
 [display]

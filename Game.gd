@@ -2,28 +2,8 @@ extends Node
 
 var level: Level
 
-func unload_level():
-	if !level:
-		Console.writeLine("No current level");
-		return
-		
-	level.free()
-		
-func reload_level():
-	if !level:
-		Console.writeLine("No current level");
-		return
-		
-	load_level_by_filename(level.filename)
-	
-func load_level_by_filename(filename):
-	unload_level()
-	
-	level = load(filename).instance()
-	add_child(level)
-
 func load_level_by_name(name):
-	load_level_by_filename("res://levels/%s.tscn" % name)
+	SceneChanger.change_scene("res://levels/%s.tscn" % name)
 	
 func list_levels():
 	var filenames = list_files_in_directory("res://levels/")
@@ -33,20 +13,12 @@ func list_levels():
 func _ready():
 	level = get_tree().root.get_node("Level") as Level
 	
-	Console.addCommand('load_level', self, 'load_level_by_name')\
+	Console.addCommand('level', self, 'load_level_by_name')\
 		.setDescription('Loads a level by name')\
 		.addArgument('name', TYPE_STRING)\
 		.register()
-		
-	Console.addCommand('unload_level', self, 'unload_level')\
-		.setDescription('Unloads the current level')\
-		.register()
-		
-	Console.addCommand('reload_level', self, 'reload_level')\
-		.setDescription('Reloads the current level')\
-		.register()
-		
-	Console.addCommand('list_levels', self, 'list_levels')\
+
+	Console.addCommand('levels', self, 'list_levels')\
 		.setDescription('Lists all levels')\
 		.register()
 	
