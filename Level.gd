@@ -25,7 +25,6 @@ func remove_player():
 func die():
 	spawn_death_particles()
 	remove_player()
-	get_tree().current_scene
 	SceneChanger.change_scene(filename, 0.5)
 	
 func spawn_death_particles():
@@ -37,5 +36,3 @@ func spawn_death_particles():
 	mat.direction = Vector3(norm_vel.x, norm_vel.y, 0)
 	mat.initial_velocity = player.prev_velocity.length() * 0.5
 	get_tree().root.add_child(death_particles)
-	yield(get_tree().create_timer(1), "timeout")
-	death_particles.queue_free()

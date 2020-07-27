@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entities/tileset/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Level.gd" type="Script" id=2]
 [ext_resource path="res://entities/end/End.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/tile_spawner/tile_spawner.gd" type="Script" id=5]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -19,17 +18,3 @@ position = Vector2( 1207.74, 384.666 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
-
-[node name="Objects" type="TileMap" parent="."]
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 32, 32 )
-format = 1
-
-[node name="TileSpawner" type="Node2D" parent="."]
-script = ExtResource( 5 )
-source_tilemap = NodePath("../Objects")
-mapping = "res://tilespawn.json"
-clear_children_before_baking = true
-spawn_at_runtime = false
-target_node = NodePath(".")
-grid_alignment = 0
