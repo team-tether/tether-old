@@ -59,7 +59,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "node_fsm_plugin", "quentincaffeino-console", "tile_spawner" )
+enabled=PoolStringArray( "fabianlc_scene_palette", "node_fsm_plugin", "quentincaffeino-console", "tile_spawner" )
 
 [input]
 

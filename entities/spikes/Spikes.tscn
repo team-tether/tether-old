@@ -10,11 +10,11 @@ extents = Vector2( 16, 4 )
 script = ExtResource( 2 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 12 )
+position = Vector2( 16, -4 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -16, 8 )
+position = Vector2( 0, -8 )
 texture = ExtResource( 1 )
 centered = false
 region_rect = Rect2( 0, 0, 464, 8 )

@@ -29,3 +29,7 @@ format = 1
 script = ExtResource( 5 )
 source_tilemap = NodePath("../Objects")
 mapping = "res://tilespawn.json"
+clear_children_before_baking = true
+spawn_at_runtime = false
+target_node = NodePath(".")
+grid_alignment = 0

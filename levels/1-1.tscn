@@ -1,7 +1,9 @@
-[gd_scene load_steps=99 format=2]
+[gd_scene load_steps=101 format=2]
 
 [ext_resource path="res://Level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/spikes/Spikes.gd" type="Script" id=2]
 [ext_resource path="res://entities/tileset/tileset.png" type="Texture" id=3]
+[ext_resource path="res://entities/spikes/Spikes.tscn" type="PackedScene" id=4]
 [ext_resource path="res://MergeAutotiles.gd" type="Script" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -933,4 +935,211 @@ tile_data = PoolIntArray( -1, 2, 1, -65536, 2, 65536, -65535, 2, 65536, -65534, 
 tile_set = SubResource( 95 )
 
 [node name="TileSpawner" parent="." index="4"]
+clear_children_before_baking = true
 spawn_at_runtime = true
+target_node = NodePath(".")
+grid_alignment = 0
+
+[node name="Spikes" type="Area2D" parent="." index="6" instance=ExtResource( 4 )]
+position = Vector2( 608, 608 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes2" type="Area2D" parent="." index="7" instance=ExtResource( 4 )]
+position = Vector2( 640, 608 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes3" type="Area2D" parent="." index="8" instance=ExtResource( 4 )]
+position = Vector2( 672, 608 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes4" type="Area2D" parent="." index="9" instance=ExtResource( 4 )]
+position = Vector2( 704, 608 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes5" type="Area2D" parent="." index="10" instance=ExtResource( 4 )]
+position = Vector2( 736, 608 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes6" type="Area2D" parent="." index="11" instance=ExtResource( 4 )]
+position = Vector2( 768, 608 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes7" type="Area2D" parent="." index="12" instance=ExtResource( 4 )]
+position = Vector2( 256, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes8" type="Area2D" parent="." index="13" instance=ExtResource( 4 )]
+position = Vector2( 288, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes9" type="Area2D" parent="." index="14" instance=ExtResource( 4 )]
+position = Vector2( 320, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes10" type="Area2D" parent="." index="15" instance=ExtResource( 4 )]
+position = Vector2( 352, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes11" type="Area2D" parent="." index="16" instance=ExtResource( 4 )]
+position = Vector2( 384, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes12" type="Area2D" parent="." index="17" instance=ExtResource( 4 )]
+position = Vector2( 416, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes13" type="Area2D" parent="." index="18" instance=ExtResource( 4 )]
+position = Vector2( 448, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes14" type="Area2D" parent="." index="19" instance=ExtResource( 4 )]
+position = Vector2( 480, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes15" type="Area2D" parent="." index="20" instance=ExtResource( 4 )]
+position = Vector2( 512, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes16" type="Area2D" parent="." index="21" instance=ExtResource( 4 )]
+position = Vector2( 544, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes17" type="Area2D" parent="." index="22" instance=ExtResource( 4 )]
+position = Vector2( 576, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes18" type="Area2D" parent="." index="23" instance=ExtResource( 4 )]
+position = Vector2( 608, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes19" type="Area2D" parent="." index="24" instance=ExtResource( 4 )]
+position = Vector2( 640, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes20" type="Area2D" parent="." index="25" instance=ExtResource( 4 )]
+position = Vector2( 672, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+
+[node name="Spikes21" type="Area2D" parent="." index="26" instance=ExtResource( 4 )]
+position = Vector2( 704, 320 )
+scale = Vector2( 1, -1 )
+script = ExtResource( 2 )
+__meta__ = {
+"local_rect": Rect2( 0, -8, 32, 8 ),
+"local_rect_center": Vector2( 16, -4 )
+}
+[connection signal="body_entered" from="Spikes" to="Spikes" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes2" to="Spikes2" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes3" to="Spikes3" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes4" to="Spikes4" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes5" to="Spikes5" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes6" to="Spikes6" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes7" to="Spikes7" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes8" to="Spikes8" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes9" to="Spikes9" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes10" to="Spikes10" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes11" to="Spikes11" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes12" to="Spikes12" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes13" to="Spikes13" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes14" to="Spikes14" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes15" to="Spikes15" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes16" to="Spikes16" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes17" to="Spikes17" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes18" to="Spikes18" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes19" to="Spikes19" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes20" to="Spikes20" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes21" to="Spikes21" method="_on_body_entered"]
