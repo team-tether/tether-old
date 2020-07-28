@@ -16,8 +16,6 @@ jobs:
             os: osx
           - buildName: Tether.x86_64
             os: StandaloneLinux64
-      matrix:
-        os: [windows, osx, linux]
     steps:
       - uses: actions/checkout@v2.3.1
       - id: build
