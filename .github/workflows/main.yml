@@ -9,17 +9,24 @@ jobs:
     name: Publish
     strategy:
       matrix:
+        include:
+          - buildName: Tether.exe
+            os: windows
+          - buildName: Tether.zip
+            os: osx
+          - buildName: Tether.x86_64
+            os: StandaloneLinux64
+      matrix:
         os: [windows, osx, linux]
     steps:
       - uses: actions/checkout@v2.3.1
       - id: build
         uses: josephbmanley/build-godot-action@v1.4.0
         with:
-          name: Tether
+          name: ${{ matrix.buildName }}
           preset: ${{ matrix.os }}
           projectDir: ./
-          package: true
-      - uses: josephbmanley/butler-publish-itchio-action@master
+      - uses: josephbmanley/butler-publish-itchio-action@v1.0.2
         env:
           ITCH_USER: syc
           ITCH_GAME: tether
