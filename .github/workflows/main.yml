@@ -11,16 +11,17 @@ jobs:
       matrix:
         os: [windows, osx, linux]
     steps:
-      - uses: actions/checkout@v1
-      - id: godot
+      - uses: actions/checkout@v2.3.1
+      - id: build
         uses: josephbmanley/build-godot-action@v1.4.0
         with:
           name: Tether
           preset: ${{ matrix.os }}
+          projectDir: ./
       - uses: josephbmanley/butler-publish-itchio-action@master
         env:
           ITCH_USER: syc
           ITCH_GAME: tether
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: ${{ matrix.os }}
-          PACKAGE: ${{ steps.godot.build }}
+          PACKAGE: ${{ github.workspace }}/${{ steps.build.outputs.build }}
