@@ -18,6 +18,7 @@ jobs:
           name: Tether
           preset: ${{ matrix.os }}
           projectDir: ./
+          package: true
       - uses: josephbmanley/butler-publish-itchio-action@master
         env:
           ITCH_USER: syc
