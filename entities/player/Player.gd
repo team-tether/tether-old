@@ -8,7 +8,7 @@ export var starting_angular_velocity: float = 0
 var starting_position: Vector2
 
 var acceleration = starting_acceleration
-var velocity = starting_velocity
+var velocity: Vector2 = starting_velocity
 var prev_velocity = velocity
 var angular_velocity = starting_angular_velocity
 
@@ -25,6 +25,7 @@ onready var camera = $Camera2D
 
 onready var left_wall_ray = $LeftWallRay
 onready var right_wall_ray = $RightWallRay
+onready var ground_ray = $GroundRay
 
 onready var rope = $Rope
 onready var rope_shot = $RopeShot
@@ -61,6 +62,10 @@ func wall_rays_normal():
 	
 	if right_wall_ray.is_colliding():
 		return right_wall_ray.get_collision_normal()
+		
+func ground_ray_normal():
+	if ground_ray.is_colliding():
+		return ground_ray.get_collision_normal()
 
 func shoot_rope():
 	if is_shooting_rope:

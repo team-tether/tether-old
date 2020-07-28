@@ -12,7 +12,7 @@ func on_exit(player):
 func on_physics_process(player: Player, delta):
 	.on_physics_process(player, delta)
 
-	if !player.is_on_floor():
+	if !player.ground_ray_normal():
 		go_to("Falling")
 		
 	if !player.is_shooting_rope:

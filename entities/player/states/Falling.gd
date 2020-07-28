@@ -8,11 +8,11 @@ func on_exit(player):
 func on_physics_process(player, delta):
 	.on_physics_process(player, delta)
 	
-	if player.is_on_floor():
+	if player.ground_ray_normal():
 		go_to("Grounded")
 		
-	if player.wall_rays_normal():
-		go_to("WallSliding")
+#	if player.wall_rays_normal():
+#		go_to("WallSliding")
 		
 	player.angular_velocity *= angular_drag
 	player.sprite.rotation += player.angular_velocity * delta

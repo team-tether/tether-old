@@ -51,6 +51,10 @@ cast_to = Vector2( 10, 0 )
 enabled = true
 cast_to = Vector2( -10, 0 )
 
+[node name="GroundRay" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 14 )
+
 [node name="Rope" type="Line2D" parent="."]
 visible = false
 points = PoolVector2Array( 10967.2, -1949.13 )
@@ -80,6 +84,7 @@ process_material = SubResource( 2 )
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 5 )
+active = true
 initial_state = "Falling"
 target = NodePath("..")
 
@@ -96,4 +101,3 @@ drag = Vector2( 0.9, 1 )
 
 [node name="WallSliding" type="Node" parent="States"]
 script = ExtResource( 10 )
-drag = Vector2( 1, 0.8 )
