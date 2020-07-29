@@ -12,10 +12,12 @@ var velocity: Vector2 = starting_velocity
 var prev_velocity = velocity
 var angular_velocity = starting_angular_velocity
 
-export var max_rope_length = 300
+export var min_rope_length = 15
+export var max_rope_length = 450
 export var max_rope_shot_angle = PI/4
 export var rope_shot_angle = PI/4 setget set_rope_shot_angle
 export var rope_shot_speed = 20
+var rope_length = 0.0
 var rope_shot_length = 0.0
 var is_shooting_rope = false
 
@@ -94,8 +96,8 @@ func shoot_rope():
 					break
 			
 			rope.reset()
-			rope.length = position.distance_to(point)
 			rope.push(point + normal + (position - point).normalized())
+			rope.free_length = position.distance_to(point)
 			rope_shot_length = 0
 			states.go_to("Tethered")
 			break

@@ -1,6 +1,13 @@
 extends Line2D
 
-export var length = 100
+var free_length
+var length setget ,get_length 
+
+func get_length():
+	var result = 0
+	for i in range(points.size() - 1):
+		result += points[i].distance_to(points[i + 1])
+	return result
 
 func _ready():
 	add_point(Vector2.ZERO)

@@ -36,16 +36,23 @@ func on_physics_process(player: Player, delta):
 	player.velocity = tangent * player.velocity.dot(tangent) * drag
 	
 	if input_direction.y != 0:
-		var new_rope_length = player.rope.length + input_direction.y * rope_length_speed * delta
-		player.velocity *= pow(player.rope.length / new_rope_length, 1)
-		player.rope.length = new_rope_length
+		var new_rope_length = player.rope.free_length + input_direction.y * rope_length_speed * delta
+		var captured_length = player.rope.length - player.rope.free_length
+		var new_total_length = captured_length + new_rope_length
+		if new_total_length > player.max_rope_length:
+			new_rope_length -= new_total_length - player.max_rope_length
+		if new_total_length < player.min_rope_length:
+			new_rope_length += player.min_rope_length - new_total_length
+		
+		player.velocity *= pow(player.rope.free_length / new_rope_length, 1)
+		player.rope.free_length = new_rope_length
 		
 	player.velocity = player.velocity.clamped(max_velocity_mag)
 	
 	var new_position = player.position + (player.velocity * delta)
 	var new_to_pivot = new_position - pivot
 	var new_length_to_pivot = new_to_pivot.length()
-	new_position = pivot + (new_to_pivot * (player.rope.length / new_length_to_pivot))
+	new_position = pivot + (new_to_pivot * (player.rope.free_length / new_length_to_pivot))
 
 	var move_vector = new_position - player.position
 	var move_result = player.move_and_collide(move_vector)
@@ -97,7 +104,7 @@ func on_physics_process(player: Player, delta):
 			player.rope.pop()
 
 	var resulting_to_pivot = player.position - player.rope.pivot()
-	player.rope.length = resulting_to_pivot.length()
+	player.rope.free_length = resulting_to_pivot.length()
 	player.rope_shot_angle = to_pivot.angle_to(Vector2.DOWN)
 	
 	if Input.is_action_just_pressed("toggle_rope"):
