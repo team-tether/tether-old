@@ -31,7 +31,6 @@ __meta__ = {
 rope_shot_angle = 0.785398
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -89,14 +88,14 @@ target = NodePath("..")
 
 [node name="Tethered" type="Node" parent="States"]
 script = ExtResource( 4 )
-speed = 10
+speed = 8
 
 [node name="Falling" type="Node" parent="States"]
 script = ExtResource( 2 )
 
 [node name="Grounded" type="Node" parent="States"]
 script = ExtResource( 7 )
-drag = Vector2( 0.9, 1 )
+drag = Vector2( 0.95, 1 )
 
 [node name="WallSliding" type="Node" parent="States"]
 script = ExtResource( 10 )

@@ -33,7 +33,6 @@ func on_physics_process(player: Player, delta):
 			player.acceleration += Vector2(input_direction.x * speed, speed)
 	
 	player.velocity += player.acceleration
-	player.velocity = tangent * player.velocity.dot(tangent) * drag
 	
 	if input_direction.y != 0:
 		var new_rope_length = player.rope.free_length + input_direction.y * rope_length_speed * delta
@@ -44,9 +43,10 @@ func on_physics_process(player: Player, delta):
 		if new_total_length < player.min_rope_length:
 			new_rope_length += player.min_rope_length - new_total_length
 		
-		player.velocity *= pow(player.rope.free_length / new_rope_length, 1)
+		player.velocity *= (player.rope.free_length / new_rope_length)
 		player.rope.free_length = new_rope_length
 		
+	player.velocity = tangent * player.velocity.dot(tangent) * drag
 	player.velocity = player.velocity.clamped(max_velocity_mag)
 	
 	var new_position = player.position + (player.velocity * delta)

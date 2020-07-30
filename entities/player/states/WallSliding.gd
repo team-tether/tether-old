@@ -5,7 +5,7 @@ func on_physics_process(player: Player, delta):
 	
 	var wall_normal = player.wall_rays_normal()
 	
-	if player.ground_ray_normal():
+	if player.is_on_floor():
 		return go_to("Grounded")
 	
 	if !wall_normal:

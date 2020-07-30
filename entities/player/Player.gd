@@ -22,7 +22,7 @@ var rope_shot_length = 0.0
 var is_shooting_rope = false
 
 onready var states: FSM = $States as FSM
-onready var sprite = $Sprite
+onready var sprite: Sprite = $Sprite
 onready var camera = $Camera2D
 
 onready var left_wall_ray = $LeftWallRay
