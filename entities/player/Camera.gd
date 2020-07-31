@@ -11,4 +11,3 @@ func _ready():
 	limit_left = pos.x
 	limit_bottom = end.y
 	limit_right = end.x
-	

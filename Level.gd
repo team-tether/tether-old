@@ -6,8 +6,17 @@ export(String, FILE, "*.tscn") var next_level_path
 var death_particles_scene = preload("res://entities/DeathParticles.tscn")
 
 onready var player: Player = $Player
+onready var camera: Camera2D = $CameraTarget/Camera
+onready var camera_target: Position2D = $CameraTarget
+
+func _ready():
+	camera_target.position = player.position
+	camera.align()
 
 func _process(_delta):
+	if player:
+		camera_target.position = player.position
+
 	if player and Input.is_action_just_pressed("respawn"):
 		die()
 
@@ -35,4 +44,4 @@ func spawn_death_particles():
 	var norm_vel = player.prev_velocity.normalized()
 	mat.direction = Vector3(norm_vel.x, norm_vel.y, 0)
 	mat.initial_velocity = player.prev_velocity.length() * 0.5
-	get_tree().root.add_child(death_particles)
+	add_child(death_particles)
