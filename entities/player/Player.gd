@@ -23,7 +23,6 @@ var is_shooting_rope = false
 
 onready var states: FSM = $States as FSM
 onready var sprite: Sprite = $Sprite
-onready var camera = $Camera2D
 
 onready var left_wall_ray = $LeftWallRay
 onready var right_wall_ray = $RightWallRay
