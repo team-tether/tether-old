@@ -3,6 +3,9 @@ extends State
 export var drag = Vector2.ONE
 export var bounciness = Vector2(0.4, 0.25)
 
+func on_enter(player):
+	player.current_state = 'Untethered'
+
 func on_physics_process(player: Player, delta):
 	var collision = player.move_and_collide(player.velocity * delta)
 

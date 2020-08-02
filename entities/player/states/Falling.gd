@@ -2,6 +2,9 @@ extends "./Untethered.gd"
 
 export var angular_drag = 1
 
+func on_enter(player):
+	player.current_state = 'Falling'
+	
 func on_exit(player):
 	player.angular_velocity = 0
 
@@ -15,4 +18,3 @@ func on_physics_process(player, delta):
 #		go_to("WallSliding")
 		
 	player.angular_velocity *= angular_drag
-	player.sprite.rotation += player.angular_velocity * delta

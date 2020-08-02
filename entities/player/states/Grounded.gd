@@ -1,7 +1,7 @@
 extends "./Untethered.gd"
 
 func on_enter(player):
-	player.sprite.rotation = 0
+	player.current_state = 'Grounded'
 
 func on_physics_process(player: Player, delta):
 	.on_physics_process(player, delta)

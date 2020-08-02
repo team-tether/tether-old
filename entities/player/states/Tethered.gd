@@ -13,21 +13,18 @@ onready var rope_ray: RayCast2D = get_node("../../RopeRay")
 
 func on_enter(player):
 	player.rope.show()
+	player.current_state = 'Tethered'
 
 func on_exit(player):
 	var rope_flipped = (player.rope.pivot() - player.position).angle_to(player.velocity) > 0
 	player.angular_velocity = player.velocity.length() * .04 * (-1 if rope_flipped else 1)
 	player.rope.hide()
-	player.sprite.rotation = 0
 
 func on_physics_process(player: Player, delta):
 	var input_direction = player.input_direction()
 	var pivot = player.rope.pivot()
 	var to_pivot = player.position - pivot
 	var tangent = to_pivot.tangent().normalized()
-	
-	if !is_equal_approx(player.velocity.x, 0):
-		player.sprite.flip_h = player.velocity.x < 0
 	
 	if input_direction.x != 0:
 			player.acceleration += Vector2(input_direction.x * speed, speed)
@@ -60,8 +57,6 @@ func on_physics_process(player: Player, delta):
 	if move_result:
 		player.velocity = -player.velocity * (active_restitution if input_direction.x != 0 else restitution)
 		player.velocity = player.velocity.clamped(max_velocity_mag)
-		
-	player.sprite.rotation = -to_pivot.angle_to(Vector2.DOWN)
 	
 	for _i in range(64):
 		var from_pivot = player.rope.pivot() - player.position
