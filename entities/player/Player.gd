@@ -23,13 +23,38 @@ var is_shooting_rope = false
 
 onready var states: FSM = $States as FSM
 
-#Player sprites
-onready var spr_player_body: Sprite = $spr_player_body
-onready var spr_player_face: Sprite = $spr_player_body/spr_player_face
-onready var spr_player_hair_left: Sprite = $spr_player_body/spr_player_hair_left
-onready var spr_player_hair_right: Sprite = $spr_player_body/spr_player_hair_right
-onready var spr_player_hand_left: Sprite = $spr_player_body/spr_player_hand_left
-onready var spr_player_hand_right: Sprite = $spr_player_body/spr_player_hand_right
+#Player sprites - Default
+onready var spr_player_body: Sprite = get_node("spr_player_body")
+onready var spr_player_face: Sprite = get_node("spr_player_body/spr_player_face")
+onready var spr_player_hat: Sprite = get_node("spr_player_body/spr_player_hat")
+onready var spr_player_hair_left: Sprite = get_node("spr_player_body/spr_player_hair_left")
+onready var spr_player_hair_right: Sprite = get_node("spr_player_body/spr_player_hair_right")
+onready var spr_player_hand_left: Sprite = get_node("spr_player_body/spr_player_hand_left")
+onready var spr_player_hand_right: Sprite = get_node("spr_player_body/spr_player_hand_right")
+#Character sprites
+var player_characters = ["spr_player_", "spr_player_chip_", "spr_player_skeleton_"]
+func change_character(spr_node_path):
+	var spr_node_path_long = spr_node_path+ "body/" + spr_node_path
+	#Hide current character and extras
+	spr_player_body.visible = false
+	spr_player_hat.visible = false
+	spr_player_hair_left.visible = false
+	spr_player_hair_right.visible = true
+	#Replace sprites
+	spr_player_body = get_node(spr_node_path + "body")
+	spr_player_face = get_node(spr_node_path_long + "face")
+	spr_player_hand_left = get_node(spr_node_path_long + "hand_left")
+	spr_player_hand_right = get_node(spr_node_path_long + "hand_right")
+	if has_node(spr_node_path_long + "hat"):
+		spr_player_hat = get_node(spr_node_path_long + "hat")
+		spr_player_hat.visible = true
+	if has_node(spr_node_path_long + "hair_left"):
+		spr_player_hair_left = get_node(spr_node_path_long + "hair_left")
+		spr_player_hair_left.visible = true
+	if has_node(spr_node_path_long + "hair_right"):
+		spr_player_hair_right = get_node(spr_node_path_long + "hair_right")
+		spr_player_hair_right.visible = true
+	spr_player_body.visible = true
 #Store default positions
 onready var hand_position_left_default = spr_player_hand_left.position
 onready var hand_position_right_default = spr_player_hand_right.position
@@ -56,6 +81,12 @@ func set_rope_shot_angle(angle):
 	rope_shot_angle = clamp(angle, -max_rope_shot_angle, max_rope_shot_angle)
 
 func _ready():
+	#Random characters -- This code is just for fun right now
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var random_character = rng.randi_range (0, 2)
+	change_character(player_characters[random_character]) #Change player character
+	
 	starting_position = position
 	
 	remove_child(rope)
@@ -143,8 +174,8 @@ func animation_hander():
 	#Lots of redundant code. I am just testing things.
 	
 	#Hide hair for now
-	spr_player_hair_left.visible = false
-	spr_player_hair_right.visible = false
+	#spr_player_hair_left.visible = false
+	#spr_player_hair_right.visible = false
 	
 	#Moved all animation code from the States
 	if current_state == 'Falling': #Need a faster way to indetify current state than strings

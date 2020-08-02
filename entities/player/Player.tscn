@@ -1,17 +1,25 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://entities/player/sprites/p1_body.png" type="Texture" id=1]
+[ext_resource path="res://entities/player/sprites/player_cp_head.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/states/Falling.gd" type="Script" id=2]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=3]
 [ext_resource path="res://entities/player/states/Tethered.gd" type="Script" id=4]
 [ext_resource path="res://addons/node_fsm_plugin/fsm_node.gd" type="Script" id=5]
 [ext_resource path="res://entities/player/Rope.gd" type="Script" id=6]
 [ext_resource path="res://entities/player/states/Grounded.gd" type="Script" id=7]
-[ext_resource path="res://entities/player/sprites/p1_head.png" type="Texture" id=8]
-[ext_resource path="res://entities/player/sprites/p1_right-hair.png" type="Texture" id=9]
+[ext_resource path="res://entities/player/sprites/player_sk_body.png" type="Texture" id=8]
+[ext_resource path="res://entities/player/sprites/player_sk_hand.png" type="Texture" id=9]
 [ext_resource path="res://entities/player/states/WallSliding.gd" type="Script" id=10]
-[ext_resource path="res://entities/player/sprites/p1_left-hair.png" type="Texture" id=11]
-[ext_resource path="res://entities/player/sprites/p1_hand.png" type="Texture" id=12]
+[ext_resource path="res://entities/player/sprites/player_cp_body.png" type="Texture" id=11]
+[ext_resource path="res://entities/player/sprites/player_cp_left_hair.png" type="Texture" id=12]
+[ext_resource path="res://entities/player/sprites/player_cp_hand.png" type="Texture" id=13]
+[ext_resource path="res://entities/player/sprites/player_sk_head.png" type="Texture" id=14]
+[ext_resource path="res://entities/player/sprites/player_ax_hand.png" type="Texture" id=15]
+[ext_resource path="res://entities/player/sprites/player_ax_right_hair.png" type="Texture" id=16]
+[ext_resource path="res://entities/player/sprites/player_ax_body.png" type="Texture" id=17]
+[ext_resource path="res://entities/player/sprites/player_ax_left_hair.png" type="Texture" id=18]
+[ext_resource path="res://entities/player/sprites/player_ax_head.png" type="Texture" id=19]
+[ext_resource path="res://entities/player/sprites/player_null_hat.png" type="Texture" id=20]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.8425
@@ -36,32 +44,87 @@ rope_shot_angle = 0.785398
 [node name="spr_player_body" type="Sprite" parent="."]
 scale = Vector2( 0.1, 0.1 )
 z_index = 1000
-texture = ExtResource( 1 )
+texture = ExtResource( 17 )
 
 [node name="spr_player_face" type="Sprite" parent="spr_player_body"]
-position = Vector2( 0, -110 )
+position = Vector2( 0, -160 )
 z_index = 1001
-texture = ExtResource( 8 )
+texture = ExtResource( 19 )
+
+[node name="spr_player_hat" type="Sprite" parent="spr_player_body"]
+position = Vector2( 0, -300 )
+scale = Vector2( 1, 1 )
+z_index = 1002
+texture = ExtResource( 20 )
 
 [node name="spr_player_hair_left" type="Sprite" parent="spr_player_body"]
+visible = false
 position = Vector2( -187.332, -140.29 )
 z_index = 999
-texture = ExtResource( 11 )
+texture = ExtResource( 18 )
 
 [node name="spr_player_hair_right" type="Sprite" parent="spr_player_body"]
+visible = false
 position = Vector2( 170.344, -150 )
 z_index = 999
-texture = ExtResource( 9 )
+texture = ExtResource( 16 )
 
 [node name="spr_player_hand_left" type="Sprite" parent="spr_player_body"]
 position = Vector2( 100, 0 )
 z_index = 1002
-texture = ExtResource( 12 )
+texture = ExtResource( 15 )
 
 [node name="spr_player_hand_right" type="Sprite" parent="spr_player_body"]
 position = Vector2( 200, 0 )
 z_index = 1002
+texture = ExtResource( 15 )
+
+[node name="spr_player_chip_body" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 0.1, 0.1 )
+z_index = 1000
+texture = ExtResource( 11 )
+
+[node name="spr_player_chip_face" type="Sprite" parent="spr_player_chip_body"]
+position = Vector2( 0, -160 )
+z_index = 1001
+texture = ExtResource( 1 )
+
+[node name="spr_player_chip_hair_left" type="Sprite" parent="spr_player_chip_body"]
+position = Vector2( -187.332, -140.29 )
+z_index = 999
 texture = ExtResource( 12 )
+
+[node name="spr_player_chip_hand_left" type="Sprite" parent="spr_player_chip_body"]
+position = Vector2( 100, 0 )
+z_index = 1002
+texture = ExtResource( 13 )
+
+[node name="spr_player_chip_hand_right" type="Sprite" parent="spr_player_chip_body"]
+position = Vector2( 200, 0 )
+z_index = 1002
+texture = ExtResource( 13 )
+
+[node name="spr_player_skeleton_body" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 0.1, 0.1 )
+z_index = 1000
+texture = ExtResource( 8 )
+
+[node name="spr_player_skeleton_face" type="Sprite" parent="spr_player_skeleton_body"]
+position = Vector2( 0, -160 )
+z_index = 1001
+texture = ExtResource( 14 )
+
+[node name="spr_player_skeleton_hand_left" type="Sprite" parent="spr_player_skeleton_body"]
+position = Vector2( 100, 0 )
+z_index = 1002
+texture = ExtResource( 9 )
+
+[node name="spr_player_skeleton_hand_right" type="Sprite" parent="spr_player_skeleton_body"]
+position = Vector2( 200, 0 )
+z_index = 1002
+texture = ExtResource( 9 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
