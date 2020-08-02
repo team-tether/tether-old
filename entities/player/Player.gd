@@ -89,6 +89,7 @@ func ground_ray_normal():
 		return ground_ray.get_collision_normal()
 
 func shoot_rope():
+	current_state = 'Shooting Rope'
 	if is_shooting_rope:
 		return
 	
@@ -175,3 +176,12 @@ func animation_hander():
 		#Reposition hands
 		spr_player_hand_left.position = hand_position_left_default
 		spr_player_hand_right.position = hand_position_right_default
+		
+	if current_state == 'Shooting Rope':
+		#Buggy :) but good enough for tonight
+		var hand_distance = 240
+		var rope_v = Vector2.UP.rotated(rope_shot_angle) * hand_distance
+		if spr_direction.x == DIRECTION_RIGHT:
+			spr_player_hand_right.position = rope_v
+		else:
+			spr_player_hand_right.position = Vector2(-rope_v.x, rope_v.y)
