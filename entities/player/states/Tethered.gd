@@ -13,7 +13,7 @@ onready var rope_ray: RayCast2D = get_node("../../RopeRay")
 
 func on_enter(player):
 	player.rope.show()
-	player.current_state = 'Tethered'
+	player.rig.current_state = 'Tethered'
 
 func on_exit(player):
 	var rope_flipped = (player.rope.pivot() - player.position).angle_to(player.velocity) > 0

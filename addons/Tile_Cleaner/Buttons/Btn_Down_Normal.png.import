@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player.png-5e2e7e7552b041428056885c13411183.stex"
+path="res://.import/Btn_Down_Normal.png-c614103831809eb62c30587ffdaa3295.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/player.png"
-dest_files=[ "res://.import/player.png-5e2e7e7552b041428056885c13411183.stex" ]
+source_file="res://addons/Tile_Cleaner/Buttons/Btn_Down_Normal.png"
+dest_files=[ "res://.import/Btn_Down_Normal.png-c614103831809eb62c30587ffdaa3295.stex" ]
 
 [params]
 

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://entities/player/RigTextures.gd" type="Script" id=1]
+[ext_resource path="res://entities/player/sprites/p1_body.png" type="Texture" id=2]
+[ext_resource path="res://entities/player/sprites/p1_hand.png" type="Texture" id=3]
+[ext_resource path="res://entities/player/sprites/p1_head.png" type="Texture" id=4]
+
+[resource]
+script = ExtResource( 1 )
+body = ExtResource( 2 )
+head = ExtResource( 4 )
+left_hand = ExtResource( 3 )
+right_hand = ExtResource( 3 )

@@ -19,7 +19,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 293.0
-margin_bottom = 593.0
+margin_bottom = 1073.0
 size_flags_horizontal = 9
 size_flags_vertical = 9
 __meta__ = {
@@ -86,7 +86,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-spacing = 1
 
 [node name="CSelectedNode" type="VBoxContainer" parent="VBoxContainer/TabContainer/Actions/Actions"]
 margin_right = 78.0
@@ -200,7 +199,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-spacing = 1
 
 [node name="CSyncToEditor" type="VBoxContainer" parent="VBoxContainer/TabContainer/Grid/Config"]
 margin_right = 88.0
@@ -345,7 +343,7 @@ suffix = "px"
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_top = 137.0
 margin_right = 286.0
-margin_bottom = 586.0
+margin_bottom = 1066.0
 rect_clip_content = false
 size_flags_vertical = 3
 
@@ -356,4 +354,3 @@ margin_right = 286.0
 size_flags_horizontal = 11
 size_flags_vertical = 9
 script = ExtResource( 2 )
-spacing = 1

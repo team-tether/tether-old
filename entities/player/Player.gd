@@ -23,49 +23,7 @@ var is_shooting_rope = false
 
 onready var states: FSM = $States as FSM
 
-#Player sprites - Default
-onready var spr_player_body: Sprite = get_node("spr_player_body")
-onready var spr_player_face: Sprite = get_node("spr_player_body/spr_player_face")
-onready var spr_player_hat: Sprite = get_node("spr_player_body/spr_player_hat")
-onready var spr_player_hair_left: Sprite = get_node("spr_player_body/spr_player_hair_left")
-onready var spr_player_hair_right: Sprite = get_node("spr_player_body/spr_player_hair_right")
-onready var spr_player_hand_left: Sprite = get_node("spr_player_body/spr_player_hand_left")
-onready var spr_player_hand_right: Sprite = get_node("spr_player_body/spr_player_hand_right")
-#Character sprites
-var player_characters = ["spr_player_", "spr_player_chip_", "spr_player_skeleton_"]
-func change_character(spr_node_path):
-	var spr_node_path_long = spr_node_path+ "body/" + spr_node_path
-	#Hide current character and extras
-	spr_player_body.visible = false
-	spr_player_hat.visible = false
-	spr_player_hair_left.visible = false
-	spr_player_hair_right.visible = true
-	#Replace sprites
-	spr_player_body = get_node(spr_node_path + "body")
-	spr_player_face = get_node(spr_node_path_long + "face")
-	spr_player_hand_left = get_node(spr_node_path_long + "hand_left")
-	spr_player_hand_right = get_node(spr_node_path_long + "hand_right")
-	if has_node(spr_node_path_long + "hat"):
-		spr_player_hat = get_node(spr_node_path_long + "hat")
-		spr_player_hat.visible = true
-	if has_node(spr_node_path_long + "hair_left"):
-		spr_player_hair_left = get_node(spr_node_path_long + "hair_left")
-		spr_player_hair_left.visible = true
-	if has_node(spr_node_path_long + "hair_right"):
-		spr_player_hair_right = get_node(spr_node_path_long + "hair_right")
-		spr_player_hair_right.visible = true
-	spr_player_body.visible = true
-#Store default positions
-onready var hand_position_left_default = spr_player_hand_left.position
-onready var hand_position_right_default = spr_player_hand_right.position
-#Storing values the sprite system needs access to
-var current_state = ''
-var current_delta = 0
-#Stores sprite direction so that it can be flipped vertically or horizontally
-const DIRECTION_RIGHT = 1
-const DIRECTION_LEFT = -1
-var spr_direction = Vector2(DIRECTION_RIGHT, 1) #Set default direction
-#End of sprites code
+onready var rig: Rig = $Rig
 
 onready var left_wall_ray = $LeftWallRay
 onready var right_wall_ray = $RightWallRay
@@ -77,6 +35,9 @@ onready var rope_shot_ray: RayCast2D = $RopeShotRay
 
 onready var rope_direction_indicator = $RopeDirectionIndicator
 
+# TODO: Better way to reference these
+var rig_textures = ["res://entities/player/DefaultTextures.tres", "res://entities/player/ChipTextures.tres"]
+
 func set_rope_shot_angle(angle):
 	rope_shot_angle = clamp(angle, -max_rope_shot_angle, max_rope_shot_angle)
 
@@ -84,8 +45,8 @@ func _ready():
 	#Random characters -- This code is just for fun right now
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var random_character = rng.randi_range (0, 2)
-	change_character(player_characters[random_character]) #Change player character
+	var random_character = rng.randi_range(0, rig_textures.size() - 1)
+	change_character(rig_textures[random_character]) #Change player character
 	
 	starting_position = position
 	
@@ -95,9 +56,8 @@ func _ready():
 	yield(get_tree().create_timer(0.1), "timeout")
 	shoot_rope()
 
-func _process(_delta):
+func _process(delta):
 	rope.update_body_pos(position)
-	animation_hander() #Run everyframe
 	
 	if rope_shot.visible:
 		rope_shot.set_point_position(1, rope_shot_ray.cast_to)
@@ -106,7 +66,6 @@ func _physics_process(_delta):
 	prev_velocity = velocity
 	acceleration = Vector2.DOWN * gravity
 	velocity += acceleration
-	current_delta = _delta
 	
 func wall_rays_normal():
 	if left_wall_ray.is_colliding():
@@ -120,7 +79,7 @@ func ground_ray_normal():
 		return ground_ray.get_collision_normal()
 
 func shoot_rope():
-	current_state = 'Shooting Rope'
+	rig.current_state = 'Shooting Rope'
 	if is_shooting_rope:
 		return
 	
@@ -167,52 +126,6 @@ func input_direction() -> Vector2:
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
 
-
-#Player animation handler
-func animation_hander():
-	
-	#Lots of redundant code. I am just testing things.
-	
-	#Hide hair for now
-	#spr_player_hair_left.visible = false
-	#spr_player_hair_right.visible = false
-	
-	#Moved all animation code from the States
-	if current_state == 'Falling': #Need a faster way to indetify current state than strings
-		spr_player_body.rotation += angular_velocity * current_delta
-		#Reposition hands
-		spr_player_hand_left.position = Vector2(-100,-100)
-		spr_player_hand_right.position = Vector2(100,-100)
-	
-	if current_state == 'Grounded':
-		spr_player_body.rotation = 0
-		#Reposition hands
-		spr_player_hand_left.position = Vector2(-100,75)
-		spr_player_hand_right.position = Vector2(100,75)
-		
-	if current_state == 'Tethered':
-		#Rotate / flip body based on rope angle
-		var to_pivot = position - rope.pivot() #duplicate code - bad practice
-		if (velocity.x > 0):
-			spr_player_body.rotation = -to_pivot.angle_to(Vector2.LEFT) #Swing right
-			if spr_direction.x == DIRECTION_LEFT:
-				spr_player_body.apply_scale(Vector2(DIRECTION_RIGHT * spr_direction.x, 1)) # flip
-				spr_direction = Vector2(DIRECTION_RIGHT, spr_direction.y) # update direction
-		else:
-			spr_player_body.rotation = -to_pivot.angle_to(Vector2.RIGHT) #Swing left
-			if spr_direction.x == DIRECTION_RIGHT:
-				spr_player_body.apply_scale(Vector2(DIRECTION_LEFT * spr_direction.x, 1)) # flip
-				spr_direction = Vector2(DIRECTION_LEFT, spr_direction.y) # update direction
-		
-		#Reposition hands
-		spr_player_hand_left.position = hand_position_left_default
-		spr_player_hand_right.position = hand_position_right_default
-		
-	if current_state == 'Shooting Rope':
-		#Buggy :) but good enough for tonight
-		var hand_distance = 240
-		var rope_v = Vector2.UP.rotated(rope_shot_angle) * hand_distance
-		if spr_direction.x == DIRECTION_RIGHT:
-			spr_player_hand_right.position = rope_v
-		else:
-			spr_player_hand_right.position = Vector2(-rope_v.x, rope_v.y)
+func change_character(rig_textures_path):
+	var rig_textures: RigTextures = load(rig_textures_path)
+	rig.textures = rig_textures

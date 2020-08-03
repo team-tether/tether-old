@@ -3,7 +3,8 @@ extends "./Untethered.gd"
 export var angular_drag = 1
 
 func on_enter(player):
-	player.current_state = 'Falling'
+	if player.rig:
+		player.rig.current_state = 'Falling'
 	
 func on_exit(player):
 	player.angular_velocity = 0
