@@ -56,7 +56,7 @@ func _ready():
 	yield(get_tree().create_timer(0.1), "timeout")
 	shoot_rope()
 
-func _process(delta):
+func _process(_delta):
 	rope.update_body_pos(position)
 	
 	if rope_shot.visible:
@@ -127,5 +127,5 @@ func input_direction() -> Vector2:
 	)
 
 func change_character(rig_textures_path):
-	var rig_textures: RigTextures = load(rig_textures_path)
-	rig.textures = rig_textures
+	var t = load(rig_textures_path)
+	rig.textures = t

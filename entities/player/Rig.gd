@@ -45,7 +45,7 @@ func _physics_process(delta):
 		"Falling":
 			rotation += player.angular_velocity * delta
 
-func _process(delta):
+func _process(_delta):
 	match current_state:
 		"Falling":
 			#Reposition hands
