@@ -18,8 +18,16 @@ onready var hand_position_right_default = right_hand.position
 var player
 var current_state = ''
 
+
+
 func _ready():
 	player = get_parent()
+	#z-index sorting
+	var z_index_starting_position = 1000
+	body.z_index = z_index_starting_position #Bottom
+	head.z_index = z_index_starting_position + 1
+	left_hand.z_index = z_index_starting_position + 2
+	right_hand.z_index = z_index_starting_position + 3 #Top
 
 func set_rig_textures(t: RigTextures):
 	body.texture = t.body
@@ -57,19 +65,20 @@ func _process(_delta):
 			left_hand.position = Vector2(-100,75)
 			right_hand.position = Vector2(100,75)
 		"Tethered":
-			#Rotate / flip body based on rope angle
+			#Rotate / flip body based on players position compared to rope end point
 			var to_pivot = player.position - player.rope.pivot() #duplicate code - bad practice
-			var moving_right = player.velocity.x > 0
+			var tolerance = 8 #Just stops the character from shaking if its not swinging much
+			var moving_right = (player.position.x - tolerance) < player.rope.pivot().x #player.velocity.x > 0
 			rotation = -to_pivot.angle_to(Vector2.LEFT if moving_right else Vector2.RIGHT)
 			set_flip_h(!moving_right)
 			#Reposition hands
 			left_hand.position = hand_position_left_default
 			right_hand.position = hand_position_right_default
 		"Shooting Rope":
-			var hand_distance = 240
+			var hand_distance = 300
+			#This is currently broken, it will have to rotate based on the direction of the rope relative to the current angle of the player
+			#Haven't figured out how to calculate it yet because I don't know Godots built in functions
 			var rope_v = Vector2.UP.rotated(player.rope_shot_angle) * hand_distance
-			if !flip_h:
-				right_hand.position = rope_v
-			else:
-				right_hand.position = Vector2(-rope_v.x, rope_v.y)
+			right_hand.position = rope_v
+			
 
