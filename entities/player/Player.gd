@@ -102,7 +102,7 @@ func shoot_rope():
 			if collider is TileMap:
 				var tilemap: TileMap = collider as TileMap
 				var cell = tilemap.get_cellv(tilemap.world_to_map(point - normal))
-				if tilemap.tile_set.tile_get_name(cell) == "metal":
+				if tilemap.tile_set.tile_get_name(cell).begins_with("metal"):
 					break
 			
 			rope.reset()

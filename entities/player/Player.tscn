@@ -80,6 +80,7 @@ process_material = SubResource( 2 )
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 5 )
+active = true
 initial_state = "Falling"
 target = NodePath("..")
 

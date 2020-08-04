@@ -2,6 +2,7 @@ extends Node2D
 class_name Level
 
 export(String, FILE, "*.tscn") var next_level_path
+export var fixed_camera = false
 
 var death_particles_scene = preload("res://entities/DeathParticles.tscn")
 
@@ -14,7 +15,7 @@ func _ready():
 	camera.align()
 
 func _process(_delta):
-	if player:
+	if player and !fixed_camera:
 		camera_target.position = player.position
 
 	if player and Input.is_action_just_pressed("respawn"):
