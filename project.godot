@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Resource",
-"class": "BitmaskEdgesData",
-"language": "GDScript",
-"path": "res://addons/Tile_Cleaner/Bitmask_Edges_Data.gd"
-}, {
 "base": "Node",
 "class": "FSM",
 "language": "GDScript",
@@ -43,21 +38,14 @@ _global_script_classes=[ {
 "class": "State",
 "language": "GDScript",
 "path": "res://addons/node_fsm_plugin/state_node.gd"
-}, {
-"base": "Resource",
-"class": "TilePattern",
-"language": "GDScript",
-"path": "res://addons/Tile_Cleaner/Tile_Pattern.gd"
 } ]
 _global_script_class_icons={
-"BitmaskEdgesData": "res://addons/Tile_Cleaner/Icons/Bitmask_Edges_Icon.png",
 "FSM": "res://addons/node_fsm_plugin/fsm_icon.svg",
 "Level": "",
 "Player": "",
 "Rig": "",
 "RigTextures": "",
-"State": "res://addons/node_fsm_plugin/state_icon.svg",
-"TilePattern": "res://addons/Tile_Cleaner/Icons/Tile_Pattern_Icon.png"
+"State": "res://addons/node_fsm_plugin/state_icon.svg"
 }
 
 [application]
@@ -82,7 +70,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "Tile_Cleaner", "fabianlc_scene_palette", "node_fsm_plugin", "quentincaffeino-console" )
+enabled=PoolStringArray( "fabianlc_scene_palette", "node_fsm_plugin", "quentincaffeino-console" )
 
 [input]
 
