@@ -19,7 +19,16 @@ func _process(_delta):
 		camera_target.position = player.position
 
 	if player and Input.is_action_just_pressed("respawn"):
+		print("User forced respawn with input_key")
 		die()
+	
+	#Change levels with brackets: Next: "{" Previous: "}"
+	if player and Input.is_action_just_pressed("editor_next_level"):
+		print("User changed to next level with input_key")
+		win()
+	if player and Input.is_action_just_pressed("editor_previous_level"):
+		print("NOT IMPLEMENTED - User changed to previous level with input_key")
+		#Currently does nothing - Not sure how to get current level or change to previous
 
 func win():
 	print("good job!")
