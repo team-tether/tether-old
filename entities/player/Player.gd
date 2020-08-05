@@ -24,6 +24,7 @@ var is_shooting_rope = false
 onready var states: FSM = $States as FSM
 
 onready var rig: Rig = $Rig
+onready var collider: CollisionShape2D = $Collider
 
 onready var left_wall_ray = $LeftWallRay
 onready var right_wall_ray = $RightWallRay
@@ -77,6 +78,10 @@ func wall_rays_normal():
 func ground_ray_normal():
 	if ground_ray.is_colliding():
 		return ground_ray.get_collision_normal()
+		
+func collider_height():
+	var capsule = collider.shape as CapsuleShape2D
+	return capsule.height
 
 func shoot_rope():
 	rig.current_state = 'Shooting Rope'
