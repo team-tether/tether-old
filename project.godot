@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "ElectricityLine",
+"language": "GDScript",
+"path": "res://entities/player/ElectricityLine.gd"
+}, {
 "base": "Node",
 "class": "FSM",
 "language": "GDScript",
@@ -45,6 +50,7 @@ _global_script_classes=[ {
 "path": "res://addons/node_fsm_plugin/state_node.gd"
 } ]
 _global_script_class_icons={
+"ElectricityLine": "",
 "FSM": "res://addons/node_fsm_plugin/fsm_icon.svg",
 "Level": "",
 "Player": "",
@@ -57,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Tether"
-run/main_scene="res://levels/Test.tscn"
+run/main_scene="res://levels/1-4-experiment.tscn"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 

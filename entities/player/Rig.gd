@@ -18,8 +18,6 @@ onready var hand_position_right_default = right_hand.position
 var player
 var current_state = ''
 
-
-
 func _ready():
 	player = get_parent()
 	#z-index sorting
@@ -54,6 +52,7 @@ func _physics_process(delta):
 			rotation += player.angular_velocity * delta
 
 func _process(_delta):
+	#Switch statement
 	match current_state:
 		"Falling":
 			#Reposition hands
