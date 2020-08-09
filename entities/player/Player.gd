@@ -37,18 +37,12 @@ onready var rope_shot_ray: RayCast2D = $RopeShotRay
 onready var rope_direction_indicator = $RopeDirectionIndicator
 
 # TODO: Better way to reference these
-var rig_textures = ["res://entities/player/DefaultTextures.tres", "res://entities/player/ChipTextures.tres"]
+var rig_textures = ["res://entities/player/DefaultTextures.tres"]
 
 func set_rope_shot_angle(angle):
 	rope_shot_angle = clamp(angle, -max_rope_shot_angle, max_rope_shot_angle)
 
 func _ready():
-	#Random characters -- This code is just for fun right now
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	var random_character = rng.randi_range(0, rig_textures.size() - 1)
-	change_character(rig_textures[random_character]) #Change player character
-	
 	starting_position = position
 	
 	remove_child(rope)
