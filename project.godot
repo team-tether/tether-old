@@ -76,7 +76,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "node_fsm_plugin", "quentincaffeino-console" )
+enabled=PoolStringArray( "node_fsm_plugin", "quentincaffeino-console", "rmsmartshape" )
 
 [input]
 
