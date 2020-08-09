@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://entities/player/states/Falling.gd" type="Script" id=2]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=3]
@@ -9,9 +9,52 @@
 [ext_resource path="res://entities/player/states/WallSliding.gd" type="Script" id=10]
 [ext_resource path="res://entities/player/Rig.tscn" type="PackedScene" id=15]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 6.8425
-height = 10.9734
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.12, 1 )
+colors = PoolColorArray( 0.28739, 0.869201, 0.980957, 1, 1, 1, 1, 0.0745098, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 1 ), 0.0, -3.83011, 0, 1, Vector2( 0.190476, 0.270455 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0977273 ), -0.213369, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 8.0
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, -100, 0 )
+initial_velocity = 10.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 8.0
+scale_random = 0.3
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
+hue_variation = -1.0
+hue_variation_random = 0.06
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="ParticlesMaterial" id=8]
+emission_shape = 1
+emission_sphere_radius = 10.0
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 4.0
+scale_random = 0.43
+color = Color( 0.494118, 0.780392, 1, 1 )
+hue_variation = 0.04
+hue_variation_random = 1.0
 
 [sub_resource type="ParticlesMaterial" id=2]
 flag_disable_z = true
@@ -26,11 +69,20 @@ orbit_velocity_random = 0.0
 position = Vector2( -0.075676, 0 )
 script = ExtResource( 3 )
 
-[node name="Rig" parent="." instance=ExtResource( 15 )]
-scale = Vector2( 0.27, 0.27 )
+[node name="Trail" type="Particles2D" parent="."]
+amount = 300
+local_coords = false
+process_material = SubResource( 3 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Rig" parent="." instance=ExtResource( 15 )]
+
+[node name="Body" type="Particles2D" parent="Rig"]
+amount = 100
+preprocess = 1.0
+process_material = SubResource( 8 )
 
 [node name="LeftWallRay" type="RayCast2D" parent="."]
 visible = false

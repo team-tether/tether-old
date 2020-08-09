@@ -7,6 +7,7 @@
 script = ExtResource( 7 )
 
 [node name="Ball" type="Sprite" parent="."]
+visible = false
 position = Vector2( -8.8441, -8.0504 )
 z_index = 1001
 texture = ExtResource( 1 )
