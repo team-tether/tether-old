@@ -1,22 +1,43 @@
 extends Node2D
 class_name Level
 
-export(String, FILE, "*.tscn") var next_level_path
-export var fixed_camera = false
+export var fix_camera_x = true
+export var fix_camera_y = true
+
+export var limit_offset = Vector2.ZERO
 
 var death_particles_scene = preload("res://entities/DeathParticles.tscn")
 
 onready var player: Player = $Player
 onready var camera: Camera2D = $CameraTarget/Camera
 onready var camera_target: Position2D = $CameraTarget
+onready var terrain: Polygon2D = $Terrain
 
 func _ready():
-	camera_target.position = player.position
+	var border = terrain.invert_border if terrain.invert_enable else 0.0
+	var padding = limit_offset + (Vector2.ONE * border)
+	var terrain_bounds: Rect2 = Util.get_bounding_rect(terrain.polygon, padding)
+	print(terrain_bounds)
+
+	camera.limit_top = int(terrain_bounds.position.y)
+	camera.limit_left = int(terrain_bounds.position.x)
+	camera.limit_bottom = int(terrain_bounds.end.y)
+	camera.limit_right = int(terrain_bounds.end.x)
+
+	if player:
+		if !fix_camera_x:
+			camera_target.position.x = player.position.x
+			camera.align()
+		if !fix_camera_y:
+			camera_target.position.y = player.position.y
 	camera.align()
 
 func _process(_delta):
-	if player and !fixed_camera:
-		camera_target.position = player.position
+	if player:
+		if !fix_camera_x:
+			camera_target.position.x = player.position.x
+		if !fix_camera_y:
+			camera_target.position.y = player.position.y
 
 	if player and Input.is_action_just_pressed("respawn"):
 		print("User forced respawn with input_key")
@@ -24,27 +45,30 @@ func _process(_delta):
 	
 	#Change levels with brackets: Next: "{" Previous: "}"
 	if player and Input.is_action_just_pressed("editor_next_level"):
-		print("User changed to next level with input_key")
-		win()
+		next_level()
 	if player and Input.is_action_just_pressed("editor_previous_level"):
-		print("NOT IMPLEMENTED - User changed to previous level with input_key")
-		#Currently does nothing - Not sure how to get current level or change to previous
+		next_level(true)
 
-func win():
-	print("good job!")
-	remove_player()
-
+func next_level(backwards = false):
+	var next_level_path = Util.find_next_level_filename(filename, backwards)
 	if next_level_path:
-		SceneChanger.change_scene(next_level_path, 1.0)
-	
+		SceneChanger.change_scene(next_level_path)
+
 func remove_player():
 	player.queue_free()
 	get_node("Rope").queue_free()
 
+func win():
+	print("good job!")
+	remove_player()
+	yield(get_tree().create_timer(0.5), "timeout")
+	next_level()
+
 func die():
 	spawn_death_particles()
 	remove_player()
-	SceneChanger.change_scene(filename, 0.5)
+	yield(get_tree().create_timer(0.5), "timeout")
+	SceneChanger.change_scene(filename)
 	
 func spawn_death_particles():
 	var death_particles: Particles2D = death_particles_scene.instance()

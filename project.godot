@@ -43,6 +43,11 @@ _global_script_classes=[ {
 "class": "State",
 "language": "GDScript",
 "path": "res://addons/node_fsm_plugin/state_node.gd"
+}, {
+"base": "Reference",
+"class": "Util",
+"language": "GDScript",
+"path": "res://Util.gd"
 } ]
 _global_script_class_icons={
 "FSM": "res://addons/node_fsm_plugin/fsm_icon.svg",
@@ -51,13 +56,14 @@ _global_script_class_icons={
 "PortalSide": "",
 "Rig": "",
 "RigTextures": "",
-"State": "res://addons/node_fsm_plugin/state_icon.svg"
+"State": "res://addons/node_fsm_plugin/state_icon.svg",
+"Util": ""
 }
 
 [application]
 
 config/name="Tether"
-run/main_scene="res://levels/1-4-experiment.tscn"
+run/main_scene="res://levels/1-1-experiment.tscn"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 
@@ -76,7 +82,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "node_fsm_plugin", "quentincaffeino-console", "rmsmartshape" )
+enabled=PoolStringArray( "node_fsm_plugin", "quentincaffeino-console" )
 
 [input]
 

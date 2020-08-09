@@ -2,7 +2,6 @@ extends Polygon2D
 
 var static_body: StaticBody2D = StaticBody2D.new()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	add_child(static_body)
 	
