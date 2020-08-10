@@ -1,25 +1,60 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Terrain.tscn" type="PackedScene" id=2]
+[ext_resource path="res://levels/terrain/placeholder_ground_terrain.jpg" type="Texture" id=3]
+[ext_resource path="res://entities/spikes/Spikes.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/portal/Portal.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 890, -186, 0, 0, 0, 0, 1066, -263, 0, 0, 0, 0, 1134, -152 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 953, 60, 0, 0, 0, 0, 989, 44, 0, 0, 0, 0, 1017, 63 )
+}
 
 [node name="Level" instance=ExtResource( 1 )]
 
-[node name="Background" parent="." index="0"]
-position = Vector2( -1.10803, -3.99799 )
+[node name="Player" parent="." index="0"]
+position = Vector2( -167, 154 )
+rope_shot_angle = -0.785
 
-[node name="Terrain" parent="." index="1"]
+[node name="End" parent="." index="1"]
+position = Vector2( 171, 166 )
+
+[node name="Spikes" parent="." index="2" instance=ExtResource( 4 )]
+position = Vector2( -390.906, -116.325 )
+editor_debug = null
+curve = SubResource( 1 )
+flip_edges = true
+
+[node name="Spikes2" parent="." index="3" instance=ExtResource( 4 )]
+position = Vector2( -390.906, -116.325 )
+editor_debug = null
+curve = SubResource( 2 )
+
+[node name="Portal" parent="." index="4" instance=ExtResource( 5 )]
+
+[node name="Entrance" parent="Portal" index="0"]
+position = Vector2( -34.1212, -54.0288 )
+
+[node name="Exit" parent="Portal" index="1"]
+position = Vector2( -645.752, 363.163 )
+
+[node name="Terrain_Island" parent="." index="5" instance=ExtResource( 2 )]
+position = Vector2( 426.49, -7.89115 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 122.949, -51.6726, 219.166, -51.6726, 169.275, 67.7078 )
+
+[node name="Terrain" parent="." index="7"]
 position = Vector2( 0, 100 )
 texture_scale = Vector2( 3, 3 )
 polygon = PoolVector2Array( -864, -296, -720.347, 276.242, -130.863, 248.722, -32, 24, -169.771, -42.6993, -620.566, -10.627, -628.818, -80.2191, 462.767, -201.279, 476.429, -168.318, 157.402, -76.2145, 32, 24, 32, 280, 872, 280, 877.926, -365.205, 737.164, -363.423, 680.146, -481.022, 491.276, -395.495, -2.28223, -530.912 )
 
-[node name="Terrain_Island" parent="." index="2" instance=ExtResource( 2 )]
-position = Vector2( 437.817, -24.8809 )
-polygon = PoolVector2Array( 122.949, -51.6726, 219.166, -51.6726, 169.275, 67.7078 )
+[node name="Background" parent="." index="8"]
+position = Vector2( -1.10803, -3.99799 )
 
-[node name="Player" parent="." index="3"]
-position = Vector2( -167, 154 )
-rope_shot_angle = -0.785
-
-[node name="End" parent="." index="4"]
-position = Vector2( 171, 166 )
+[editable path="Portal"]

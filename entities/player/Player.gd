@@ -74,8 +74,8 @@ func ground_ray_normal():
 		return ground_ray.get_collision_normal()
 		
 func collider_height():
-	var capsule = collider.shape as CapsuleShape2D
-	return capsule.height
+	var circle = collider.shape as CircleShape2D
+	return circle.radius * 2
 
 func shoot_rope():
 	rig.current_state = 'Shooting Rope'

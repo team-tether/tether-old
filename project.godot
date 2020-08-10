@@ -29,6 +29,31 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/portal/PortalSide.gd"
 }, {
+"base": "Resource",
+"class": "RMS2D_Material",
+"language": "GDScript",
+"path": "res://addons/rmsmartshape/RMSmartShapeMaterial.gd"
+}, {
+"base": "Reference",
+"class": "RMS2D_VertexProperties",
+"language": "GDScript",
+"path": "res://addons/rmsmartshape/vertex_properties.gd"
+}, {
+"base": "Reference",
+"class": "RMS2D_VertexPropertiesArray",
+"language": "GDScript",
+"path": "res://addons/rmsmartshape/vertex_properties_array.gd"
+}, {
+"base": "Node2D",
+"class": "RMSmartShape2D",
+"language": "GDScript",
+"path": "res://addons/rmsmartshape/RMSmartShape2D.gd"
+}, {
+"base": "Node2D",
+"class": "RMSmartShapeAnchor2D",
+"language": "GDScript",
+"path": "res://addons/rmsmartshape/RMSmartShapeAnchor2D.gd"
+}, {
 "base": "Node2D",
 "class": "Rig",
 "language": "GDScript",
@@ -54,6 +79,11 @@ _global_script_class_icons={
 "Level": "",
 "Player": "",
 "PortalSide": "",
+"RMS2D_Material": "",
+"RMS2D_VertexProperties": "",
+"RMS2D_VertexPropertiesArray": "",
+"RMSmartShape2D": "res://addons/rmsmartshape/shape.png",
+"RMSmartShapeAnchor2D": "res://addons/rmsmartshape/shape_anchor.png",
 "Rig": "",
 "RigTextures": "",
 "State": "res://addons/node_fsm_plugin/state_icon.svg",
@@ -83,7 +113,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "node_fsm_plugin", "quentincaffeino-console" )
+enabled=PoolStringArray( "node_fsm_plugin", "quentincaffeino-console", "rmsmartshape" )
 
 [input]
 

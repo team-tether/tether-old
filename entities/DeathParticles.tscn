@@ -1,32 +1,38 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 1 ), 0.0, -1.53153, 0, 0, Vector2( 1, 0 ), -0.366041, 0.0, 0, 0 ]
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.294382, 1 )
+colors = PoolColorArray( 0.782022, 0.899695, 0.931152, 1, 0.3078, 0.823166, 0.960938, 1, 0.3078, 0.823166, 0.960938, 1 )
 
-[sub_resource type="CurveTexture" id=2]
-curve = SubResource( 1 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, -1.53153, 0, 0, Vector2( 1, 0.192045 ), -0.366041, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 1
 emission_sphere_radius = 5.0
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
-spread = 15.0
-gravity = Vector3( 0, 980, 0 )
+spread = 30.0
+gravity = Vector3( 0, 900, 0 )
 initial_velocity = 200.0
-initial_velocity_random = 0.1
+initial_velocity_random = 0.16
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-angle = 45.0
-angle_random = 1.0
 scale = 24.0
 scale_random = 0.5
-scale_curve = SubResource( 2 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+hue_variation = 0.05
+hue_variation_random = 0.47
 
 [node name="DeathParticles" type="Particles2D"]
-emitting = false
-amount = 10
-one_shot = true
+amount = 30
 explosiveness = 1.0
 local_coords = false
-process_material = SubResource( 3 )
+process_material = SubResource( 5 )

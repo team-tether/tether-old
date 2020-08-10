@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Terrain.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level.gd" type="Script" id=2]
 [ext_resource path="res://entities/end/End.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://levels/background/background_default.png" type="Texture" id=5]
+[ext_resource path="res://levels/terrain/placeholder_ground_terrain.jpg" type="Texture" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Camera2D
@@ -13,14 +14,8 @@ script/source = "extends Camera2D
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Terrain" parent="." instance=ExtResource( 1 )]
-color = Color( 0.0745098, 0.00392157, 0.105882, 1 )
-invert_enable = true
-invert_border = 500.0
-polygon = PoolVector2Array( -640, 192, 648, 192, 648, -192, -640, -192 )
-
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( -408, 40 )
+position = Vector2( -512, 0 )
 
 [node name="End" parent="." instance=ExtResource( 3 )]
 position = Vector2( 488, 24 )
@@ -36,6 +31,12 @@ drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 script = SubResource( 1 )
+
+[node name="Terrain" parent="." instance=ExtResource( 1 )]
+texture = ExtResource( 6 )
+invert_enable = true
+invert_border = 500.0
+polygon = PoolVector2Array( -640, 192, 648, 192, 648, -192, -640, -192 )
 
 [node name="Background" type="Sprite" parent="."]
 z_index = -1000

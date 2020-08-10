@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spike2.png-989f6b7316c3790a413ddfd33f8b5a46.stex"
+path="res://.import/icon_editor_handle_add.svg-7258971e5edcfe4396b7b9c27c0ba1cc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/spikes/spike2.png"
-dest_files=[ "res://.import/spike2.png-989f6b7316c3790a413ddfd33f8b5a46.stex" ]
+source_file="res://addons/rmsmartshape/assets/icon_editor_handle_add.svg"
+dest_files=[ "res://.import/icon_editor_handle_add.svg-7258971e5edcfe4396b7b9c27c0ba1cc.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

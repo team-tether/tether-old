@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/placeholder_ground_terrain.jpg-f919a57739b6031b93cc7593d51c3a8f.stex"
+path="res://.import/grass.png-42789662e8e26fa8b0835b6acb224268.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/terrain/placeholder_ground_terrain.jpg"
-dest_files=[ "res://.import/placeholder_ground_terrain.jpg-f919a57739b6031b93cc7593d51c3a8f.stex" ]
+source_file="res://addons/rmsmartshape/sample/grass.png"
+dest_files=[ "res://.import/grass.png-42789662e8e26fa8b0835b6acb224268.stex" ]
 
 [params]
 
@@ -20,11 +20,11 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=1
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=true
+process/fix_alpha_border=false
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
