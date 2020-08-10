@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
+[ext_resource path="res://entities/player/sprites/glow.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/states/Falling.gd" type="Script" id=2]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=3]
 [ext_resource path="res://entities/player/states/Tethered.gd" type="Script" id=4]
@@ -76,6 +77,16 @@ orbit_velocity_random = 0.0
 position = Vector2( -0.075676, 0 )
 script = ExtResource( 3 )
 
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, -1 )
+texture = ExtResource( 1 )
+texture_scale = 10.0
+energy = 0.6
+shadow_enabled = true
+shadow_gradient_length = 10.0
+shadow_filter = 5
+shadow_filter_smooth = 5.0
+
 [node name="Trail" type="Particles2D" parent="."]
 amount = 300
 local_coords = false
@@ -85,6 +96,8 @@ process_material = SubResource( 5 )
 shape = SubResource( 6 )
 
 [node name="Rig" parent="." instance=ExtResource( 15 )]
+flip_h = false
+flip_v = false
 
 [node name="Body" type="Particles2D" parent="Rig"]
 amount = 100
@@ -141,6 +154,7 @@ process_material = SubResource( 10 )
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 5 )
+active = true
 initial_state = "Falling"
 target = NodePath("..")
 

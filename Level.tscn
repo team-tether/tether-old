@@ -21,6 +21,9 @@ position = Vector2( -512, 0 )
 position = Vector2( 488, 24 )
 
 [node name="CameraTarget" type="Position2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Camera" type="Camera2D" parent="CameraTarget"]
 current = true
@@ -41,3 +44,9 @@ polygon = PoolVector2Array( -640, 192, 648, 192, 648, -192, -640, -192 )
 [node name="Background" type="Sprite" parent="."]
 z_index = -1000
 texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
