@@ -17,7 +17,6 @@ func _ready():
 	var border = terrain.invert_border if terrain.invert_enable else 0.0
 	var padding = limit_offset + (Vector2.ONE * border)
 	var terrain_bounds: Rect2 = Util.get_bounding_rect(terrain.polygon, padding)
-	print(terrain_bounds)
 
 	camera.limit_top = int(terrain_bounds.position.y)
 	camera.limit_left = int(terrain_bounds.position.x)
@@ -27,7 +26,6 @@ func _ready():
 	if player:
 		if !fix_camera_x:
 			camera_target.position.x = player.position.x
-			camera.align()
 		if !fix_camera_y:
 			camera_target.position.y = player.position.y
 	camera.align()

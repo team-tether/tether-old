@@ -7,7 +7,6 @@
 limit_offset = Vector2( 100, 0 )
 
 [node name="Terrain" parent="." index="0"]
-color = Color( 0.0745098, 0.00392157, 0.105882, 1 )
 texture = ExtResource( 2 )
 texture_scale = Vector2( 5, 5 )
 polygon = PoolVector2Array( -896, 192, 896, 192, 896, -192, -896, -192 )
