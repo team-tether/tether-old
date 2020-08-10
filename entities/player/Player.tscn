@@ -9,20 +9,20 @@
 [ext_resource path="res://entities/player/states/WallSliding.gd" type="Script" id=10]
 [ext_resource path="res://entities/player/Rig.tscn" type="PackedScene" id=15]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.12, 1 )
 colors = PoolColorArray( 0.28739, 0.869201, 0.980957, 1, 1, 1, 1, 0.0745098, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 1 ), 0.0, -3.83011, 0, 1, Vector2( 0.190476, 0.270455 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0977273 ), -0.213369, 0.0, 1, 0 ]
 
-[sub_resource type="CurveTexture" id=7]
-curve = SubResource( 6 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 1
 emission_sphere_radius = 8.0
 flag_disable_z = true
@@ -34,14 +34,14 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 8.0
 scale_random = 0.3
-scale_curve = SubResource( 7 )
-color_ramp = SubResource( 5 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 hue_variation = -1.0
 hue_variation_random = 0.06
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=6]
 
-[sub_resource type="ParticlesMaterial" id=8]
+[sub_resource type="ParticlesMaterial" id=7]
 emission_shape = 1
 emission_sphere_radius = 10.0
 flag_disable_z = true
@@ -56,14 +56,14 @@ color = Color( 0.494118, 0.780392, 1, 1 )
 hue_variation = 0.04
 hue_variation_random = 1.0
 
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0, 0.996241 )
 colors = PoolColorArray( 0.356863, 0.721569, 0.784314, 1, 0.635294, 0.854902, 0.894118, 1 )
 
 [sub_resource type="Gradient" id=9]
 colors = PoolColorArray( 0.356863, 0.721569, 0.784314, 0.654902, 0.356863, 0.721569, 0.784314, 0.129412 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=10]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 0.0
@@ -79,17 +79,17 @@ script = ExtResource( 3 )
 [node name="Trail" type="Particles2D" parent="."]
 amount = 300
 local_coords = false
-process_material = SubResource( 3 )
+process_material = SubResource( 5 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 6 )
 
 [node name="Rig" parent="." instance=ExtResource( 15 )]
 
 [node name="Body" type="Particles2D" parent="Rig"]
 amount = 100
 preprocess = 1.0
-process_material = SubResource( 8 )
+process_material = SubResource( 7 )
 
 [node name="LeftWallRay" type="RayCast2D" parent="."]
 visible = false
@@ -111,7 +111,7 @@ visible = false
 points = PoolVector2Array( 10967.2, -1949.13 )
 width = 3.0
 default_color = Color( 0.356863, 0.721569, 0.784314, 1 )
-gradient = SubResource( 10 )
+gradient = SubResource( 8 )
 joint_mode = 2
 end_cap_mode = 2
 script = ExtResource( 6 )
@@ -137,11 +137,10 @@ cast_to = Vector2( 100, -100 )
 [node name="RopeDirectionIndicator" type="Particles2D" parent="."]
 visible = false
 preprocess = 1.0
-process_material = SubResource( 2 )
+process_material = SubResource( 10 )
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 5 )
-active = true
 initial_state = "Falling"
 target = NodePath("..")
 
