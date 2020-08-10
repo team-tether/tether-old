@@ -37,24 +37,47 @@ editor_debug = null
 curve = SubResource( 2 )
 
 [node name="Portal" parent="." index="4" instance=ExtResource( 5 )]
+modulate = Color( 0.709804, 0.447059, 0.87451, 1 )
+position = Vector2( -224.642, 16.9897 )
 
 [node name="Entrance" parent="Portal" index="0"]
-position = Vector2( -34.1212, -54.0288 )
+position = Vector2( 120.674, -218.263 )
+rotation = 1.34235
 
 [node name="Exit" parent="Portal" index="1"]
-position = Vector2( -645.752, 363.163 )
+position = Vector2( 291.515, -229.59 )
+rotation = 4.75592
 
-[node name="Terrain_Island" parent="." index="5" instance=ExtResource( 2 )]
+[node name="Portal2" parent="." index="5" instance=ExtResource( 5 )]
+modulate = Color( 0.537255, 0.917647, 0.521569, 1 )
+position = Vector2( -224.642, 16.9897 )
+
+[node name="Entrance" parent="Portal2" index="0"]
+position = Vector2( -406.951, 344.286 )
+rotation = 3.12701
+
+[node name="Exit" parent="Portal2" index="1"]
+position = Vector2( -344.17, -7.79517 )
+rotation = 3.00046
+
+[node name="Terrain_Island" parent="." index="6" instance=ExtResource( 2 )]
 position = Vector2( 426.49, -7.89115 )
 texture = ExtResource( 3 )
 polygon = PoolVector2Array( 122.949, -51.6726, 219.166, -51.6726, 169.275, 67.7078 )
 
-[node name="Terrain" parent="." index="7"]
+[node name="Terrain_Island2" parent="." index="7" instance=ExtResource( 2 )]
+position = Vector2( -244.604, -275.951 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 117.039, -136.75, 232.192, -161.29, 310.533, -155.627, 283.161, 232.305, 184.998, 236.081 )
+
+[node name="Terrain" parent="." index="9"]
 position = Vector2( 0, 100 )
 texture_scale = Vector2( 3, 3 )
 polygon = PoolVector2Array( -864, -296, -720.347, 276.242, -130.863, 248.722, -32, 24, -169.771, -42.6993, -620.566, -10.627, -628.818, -80.2191, 462.767, -201.279, 476.429, -168.318, 157.402, -76.2145, 32, 24, 32, 280, 872, 280, 877.926, -365.205, 737.164, -363.423, 680.146, -481.022, 491.276, -395.495, -2.28223, -530.912 )
 
-[node name="Background" parent="." index="8"]
-position = Vector2( -1.10803, -3.99799 )
+[node name="Background" parent="." index="10"]
+position = Vector2( 1.72364, 1.66528 )
 
 [editable path="Portal"]
+
+[editable path="Portal2"]
