@@ -6,11 +6,14 @@
 [node name="Level" instance=ExtResource( 1 )]
 
 [node name="Terrain" parent="." index="0"]
-polygon = PoolVector2Array( -864, -296, -743.6, 166.177, -130.863, 248.722, -32, 24, -78.8644, -34.8345, -628.818, -80.2191, 476.429, -168.318, 157.402, -76.2145, 32, 24, 32, 280, 872, 280, 872, -296, 33.2621, -405.92 )
+color = Color( 0.0745098, 0.00392157, 0.105882, 1 )
+texture_scale = Vector2( 3, 3 )
+polygon = PoolVector2Array( -864, -296, -720.347, 276.242, -130.863, 248.722, -32, 24, -169.771, -42.6993, -620.566, -10.627, -628.818, -80.2191, 462.767, -201.279, 476.429, -168.318, 157.402, -76.2145, 32, 24, 32, 280, 872, 280, 877.926, -365.205, 737.164, -363.423, 680.146, -481.022, 491.276, -395.495, -2.28223, -530.912 )
 
 [node name="Terrain_Island" parent="." index="1" instance=ExtResource( 2 )]
 position = Vector2( 437.817, -24.8809 )
-polygon = PoolVector2Array( -147.889, -19.5998, 65.9265, -57.0175, 135.417, 122.944 )
+color = Color( 0.0745098, 0.00392157, 0.105882, 1 )
+polygon = PoolVector2Array( 122.949, -51.6726, 219.166, -51.6726, 169.275, 67.7078 )
 
 [node name="Player" parent="." index="2"]
 position = Vector2( -144, 136 )
@@ -18,3 +21,6 @@ rope_shot_angle = -0.785
 
 [node name="End" parent="." index="3"]
 position = Vector2( 160, 136 )
+
+[node name="Background" parent="." index="5"]
+position = Vector2( 0, -1.7818 )

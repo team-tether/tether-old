@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/terrain/placeholder_ground_terrain.jpg" type="Texture" id=2]
 
 [node name="Level" instance=ExtResource( 1 )]
 limit_offset = Vector2( 100, 0 )
 
 [node name="Terrain" parent="." index="0"]
+color = Color( 0.0745098, 0.00392157, 0.105882, 1 )
+texture = ExtResource( 2 )
+texture_scale = Vector2( 5, 5 )
 polygon = PoolVector2Array( -896, 192, 896, 192, 896, -192, -896, -192 )
 
 [node name="Player" parent="." index="1"]
