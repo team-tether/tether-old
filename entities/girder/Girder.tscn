@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://entities/girder/girder.png" type="Texture" id=1]
+[ext_resource path="res://addons/rmsmartshape/RMSmartShape2D.gd" type="Script" id=2]
+[ext_resource path="res://addons/rmsmartshape/RMSmartShapeMaterial.gd" type="Script" id=3]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -210.213, -189.434, 0, 0, 0, 0, 190.264, -190.493 )
+}
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+top_texture_tilt = 20.0
+bottom_texture_tilt = 20.0
+top_texture = [ ExtResource( 1 ) ]
+top_texture_normal = [  ]
+left_texture = [  ]
+left_texture_normal = [  ]
+right_texture = [  ]
+right_texture_normal = [  ]
+bottom_texture = [  ]
+bottom_texture_normal = [  ]
+use_corners = false
+weld_edges = false
+top_offset = 0.0
+bottom_offset = 0.0
+right_offset = 0.0
+left_offset = 0.0
+collision_width = 1.0
+collision_offset = 0.0
+collision_extends = 0.0
+
+[node name="Girder" type="Node2D"]
+script = ExtResource( 2 )
+editor_debug = null
+curve = SubResource( 1 )
+auto_update_collider = true
+collision_polygon_node = NodePath("StaticBody2D/CollisionPolygon2D")
+shape_material = SubResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=[
+"unhookable",
+]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+modulate = Color( 1, 1, 1, 0.3 )
+polygon = PoolVector2Array( -223, -181, 202, -181, 202, -197, -223, -197 )

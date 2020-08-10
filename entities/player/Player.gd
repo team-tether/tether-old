@@ -97,13 +97,9 @@ func shoot_rope():
 			var point = rope_shot_ray.get_collision_point()
 			var normal = rope_shot_ray.get_collision_normal()
 			var collider = rope_shot_ray.get_collider()
-			
-			if collider is TileMap:
-				var tilemap: TileMap = collider as TileMap
-				var cell = tilemap.get_cellv(tilemap.world_to_map(point - normal))
-				if tilemap.tile_set.tile_get_name(cell).begins_with("metal"):
-					break
-			
+			if collider.is_in_group("unhookable"):
+				break	
+
 			rope.reset()
 			rope.push(point + normal + (position - point).normalized())
 			rope.free_length = position.distance_to(point)

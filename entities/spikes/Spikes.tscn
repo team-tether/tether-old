@@ -1,9 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://entities/spikes/Spikes.gd" type="Script" id=1]
 [ext_resource path="res://entities/spikes/spikes.png" type="Texture" id=2]
 [ext_resource path="res://addons/rmsmartshape/RMSmartShapeMaterial.gd" type="Script" id=3]
 [ext_resource path="res://addons/rmsmartshape/RMSmartShape2D.gd" type="Script" id=4]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array(  )
+}
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 3 )
@@ -31,6 +36,8 @@ collision_extends = 0.0
 modulate = Color( 0.137255, 0.00784314, 0.00784314, 1 )
 position = Vector2( -48, 64 )
 script = ExtResource( 4 )
+editor_debug = null
+curve = SubResource( 1 )
 auto_update_collider = true
 collision_polygon_node = NodePath("Area2D/CollisionPolygon2D")
 mirror_angle = false
