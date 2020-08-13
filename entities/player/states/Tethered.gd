@@ -55,7 +55,12 @@ func on_physics_process(player: Player, delta):
 	var move_result = player.move_and_collide(move_vector)
 	
 	if move_result:
+		var collision_angle = to_pivot.normalized().angle_to(move_result.normal)
+#		if abs(collision_angle) < deg2rad(10):
+#			player.position += move_result.remainder.slide(move_result.normal)
+			
 		player.velocity = -player.velocity * (active_restitution if input_direction.x != 0 else restitution)
+		
 		player.velocity = player.velocity.clamped(max_velocity_mag)
 	
 	for _i in range(64):

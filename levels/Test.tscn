@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Level.tscn" type="PackedScene" id=1]
+
+[node name="Level" instance=ExtResource( 1 )]
+
+[node name="Player" parent="." index="0"]
+position = Vector2( -32, -384 )
+rope_shot_angle = -0.785
+
+[node name="End" parent="." index="1"]
+position = Vector2( 1120, -448 )
+
+[node name="Terrain" parent="." index="3"]
+position = Vector2( 0, 100 )
+texture_scale = Vector2( 3, 3 )
+polygon = PoolVector2Array( -928, 412, 928, 412, 928, 124, -640, 124, -640, -292, -384, -292, -383.266, -302.554, -352.312, -302.554, -352, -292, 928, -292, 928, -612, -928, -612 )
+
+[node name="Background" parent="." index="4"]
+position = Vector2( 1.72364, 1.66528 )
+
+[node name="CanvasModulate" parent="." index="5"]
+color = Color( 1, 1, 1, 1 )
