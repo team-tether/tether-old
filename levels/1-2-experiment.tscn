@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Terrain.tscn" type="PackedScene" id=2]
-[ext_resource path="res://levels/terrain/placeholder_ground_terrain.jpg" type="Texture" id=3]
 [ext_resource path="res://entities/spikes/Spikes.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/portal/Portal.tscn" type="PackedScene" id=5]
 
@@ -31,11 +30,24 @@ position = Vector2( 171, 166 )
 [node name="Spikes" parent="." index="2" instance=ExtResource( 4 )]
 position = Vector2( -390.906, -116.325 )
 curve = SubResource( 1 )
+closed_shape = false
+tessellation_stages = 5
+tessellation_tolerence = 4
+use_global_space = false
+collision_bake_interval = 20
+draw_edges = false
 flip_edges = true
 
 [node name="Spikes2" parent="." index="3" instance=ExtResource( 4 )]
 position = Vector2( -390.906, -116.325 )
 curve = SubResource( 2 )
+closed_shape = false
+tessellation_stages = 5
+tessellation_tolerence = 4
+use_global_space = false
+collision_bake_interval = 20
+draw_edges = false
+flip_edges = false
 
 [node name="Portal" parent="." index="4" instance=ExtResource( 5 )]
 modulate = Color( 0.709804, 0.447059, 0.87451, 1 )
@@ -63,12 +75,10 @@ rotation = 3.00046
 
 [node name="Terrain_Island" parent="." index="6" instance=ExtResource( 2 )]
 position = Vector2( 426.49, -7.89115 )
-texture = ExtResource( 3 )
 polygon = PoolVector2Array( 122.949, -51.6726, 219.166, -51.6726, 169.275, 67.7078 )
 
 [node name="Terrain_Island2" parent="." index="7" instance=ExtResource( 2 )]
 position = Vector2( -244.604, -275.951 )
-texture = ExtResource( 3 )
 polygon = PoolVector2Array( 117.039, -136.75, 232.192, -161.29, 310.533, -155.627, 283.161, 232.305, 184.998, 236.081 )
 
 [node name="Terrain" parent="." index="9"]

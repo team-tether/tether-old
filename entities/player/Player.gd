@@ -76,8 +76,19 @@ func ground_ray_normal():
 func collider_height():
 	var circle = collider.shape as CircleShape2D
 	return circle.radius * 2
+	
+
+func int_random_range(smin, smax):
+	var total_range = smax - smin
+	var rng = randi() % total_range + 1 #Creates random int
+	return smin + rng
 
 func shoot_rope():
+	if ground_ray_normal(): #If player is on the ground
+		if (abs(velocity.x) < 10): #...and barely moving
+			var rope_shot_current_angle = rope_shot_angle
+			rope_shot_angle = deg2rad(int_random_range(-40,40)) #Shoot rope in random direction
+	
 	rig.current_state = 'Shooting Rope'
 	if is_shooting_rope:
 		return
@@ -120,8 +131,3 @@ func input_direction() -> Vector2:
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
-
-#Not in use
-#func change_character(rig_textures_path):
-	#var t = load(rig_textures_path)
-	#rig.textures = t
