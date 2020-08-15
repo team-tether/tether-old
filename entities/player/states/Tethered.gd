@@ -32,35 +32,37 @@ func on_physics_process(player: Player, delta):
 	player.velocity += player.acceleration
 	
 	if input_direction.y != 0:
-		var new_rope_length = player.rope.free_length + input_direction.y * rope_length_speed * delta
+		var rope_length_velocity = input_direction.y * rope_length_speed * delta
+		var new_rope_length = player.rope.free_length + rope_length_velocity
 		var captured_length = player.rope.length - player.rope.free_length
 		var new_total_length = captured_length + new_rope_length
 		if new_total_length > player.max_rope_length:
-			new_rope_length -= new_total_length - player.max_rope_length
+			rope_length_velocity -= new_total_length - player.max_rope_length
 		if new_total_length < player.min_rope_length:
-			new_rope_length += player.min_rope_length - new_total_length
-		
-		player.velocity *= (player.rope.free_length / new_rope_length)
-		player.rope.free_length = new_rope_length
+			rope_length_velocity += player.min_rope_length - new_total_length
+
+		var rope_resize_result = player.move_and_collide(rope_length_velocity * to_pivot.normalized())
+		if rope_resize_result:
+			var remainder_angle = rad2deg(rope_resize_result.remainder.angle_to(rope_resize_result.normal))
+			var normal_tangent = rope_resize_result.normal.tangent()
+			var diff_sign = sign(rope_resize_result.remainder.dot(normal_tangent))
+			print(rope_resize_result.remainder, " ", remainder_angle, " ", diff_sign)
+			if abs(remainder_angle) < 160:
+				player.position += rope_resize_result.remainder.length() * normal_tangent * diff_sign
+
+		player.velocity *= (player.rope.free_length / (player.rope.free_length + rope_length_velocity))
+		player.rope.free_length = (player.position - pivot).length()
 		
 	player.velocity = tangent * player.velocity.dot(tangent) * drag
 	player.velocity = player.velocity.clamped(max_velocity_mag)
 	
 	var new_position = player.position + (player.velocity * delta)
-	var new_to_pivot = new_position - pivot
-	var new_length_to_pivot = new_to_pivot.length()
-	new_position = pivot + (new_to_pivot * (player.rope.free_length / new_length_to_pivot))
-
+	new_position = pivot + ((new_position - pivot).normalized() * player.rope.free_length)
 	var move_vector = new_position - player.position
 	var move_result = player.move_and_collide(move_vector)
 	
 	if move_result:
-		var collision_angle = to_pivot.normalized().angle_to(move_result.normal)
-#		if abs(collision_angle) < deg2rad(10):
-#			player.position += move_result.remainder.slide(move_result.normal)
-			
-		player.velocity = -player.velocity * (active_restitution if input_direction.x != 0 else restitution)
-		
+		player.velocity = -player.velocity * (active_restitution if input_direction.x != 0 else restitution)		
 		player.velocity = player.velocity.clamped(max_velocity_mag)
 	
 	for _i in range(64):

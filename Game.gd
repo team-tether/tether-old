@@ -1,7 +1,7 @@
 extends Node
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+#	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 	Console.addCommand('level', self, 'load_level_by_name')\
 		.setDescription('Loads a level by name')\
