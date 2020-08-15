@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/FollowPath.gd" type="Script" id=2]
+[ext_resource path="res://Terrain.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -704, -384, 0, 0, 0, 0, -288, -384 )
+}
 
 [node name="Level" instance=ExtResource( 1 )]
 
@@ -12,7 +19,7 @@ rope_shot_angle = -0.785
 position = Vector2( 1120, -448 )
 
 [node name="Terrain" parent="." index="3"]
-position = Vector2( 0, 100 )
+position = Vector2( 0, 96 )
 texture_scale = Vector2( 3, 3 )
 polygon = PoolVector2Array( -928, 412, 928, 412, 928, 124, -640, 124, -640, -292, -384, -292, -383.266, -302.554, -352.312, -302.554, -352, -292, 928, -292, 928, -612, -928, -612 )
 
@@ -21,3 +28,16 @@ position = Vector2( 1.72364, 1.66528 )
 
 [node name="CanvasModulate" parent="." index="5"]
 color = Color( 1, 1, 1, 1 )
+
+[node name="Path2D" type="Path2D" parent="." index="6"]
+position = Vector2( 352, -32 )
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" index="0"]
+position = Vector2( -704, -384 )
+loop = false
+script = ExtResource( 2 )
+duration = 2.0
+
+[node name="Terrain2" parent="Path2D/PathFollow2D" index="0" instance=ExtResource( 3 )]
+polygon = PoolVector2Array( -96, -32, -96, 32, 96, 32, 96, -32 )
