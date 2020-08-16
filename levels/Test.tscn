@@ -19,7 +19,7 @@ rope_shot_angle = -0.785
 position = Vector2( 1120, -448 )
 
 [node name="Terrain" parent="." index="3"]
-position = Vector2( 0, 96 )
+position = Vector2( 0, 94.7401 )
 texture_scale = Vector2( 3, 3 )
 polygon = PoolVector2Array( -928, 412, 928, 412, 928, 124, -640, 124, -640, -292, -384, -292, -383.266, -302.554, -352.312, -302.554, -352, -292, 928, -292, 928, -612, -928, -612 )
 

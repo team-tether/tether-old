@@ -4,5 +4,6 @@
 [ext_resource path="res://levels/terrain/placeholder_ground_terrain.jpg" type="Texture" id=2]
 
 [node name="Terrain" type="Polygon2D"]
+color = Color( 0.894118, 0.929412, 0.862745, 1 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )

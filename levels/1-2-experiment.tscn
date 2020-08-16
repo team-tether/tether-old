@@ -28,26 +28,15 @@ rope_shot_angle = -0.785
 position = Vector2( 171, 166 )
 
 [node name="Spikes" parent="." index="2" instance=ExtResource( 4 )]
+modulate = Color( 1, 1, 1, 1 )
 position = Vector2( -390.906, -116.325 )
 curve = SubResource( 1 )
-closed_shape = false
-tessellation_stages = 5
-tessellation_tolerence = 4
-use_global_space = false
-collision_bake_interval = 20
-draw_edges = false
 flip_edges = true
 
 [node name="Spikes2" parent="." index="3" instance=ExtResource( 4 )]
+modulate = Color( 1, 1, 1, 1 )
 position = Vector2( -390.906, -116.325 )
 curve = SubResource( 2 )
-closed_shape = false
-tessellation_stages = 5
-tessellation_tolerence = 4
-use_global_space = false
-collision_bake_interval = 20
-draw_edges = false
-flip_edges = false
 
 [node name="Portal" parent="." index="4" instance=ExtResource( 5 )]
 modulate = Color( 0.709804, 0.447059, 0.87451, 1 )
@@ -89,7 +78,11 @@ polygon = PoolVector2Array( -864, -296, -720.347, 276.242, -130.863, 248.722, -3
 [node name="Background" parent="." index="10"]
 position = Vector2( 1.72364, 1.66528 )
 
+[node name="CanvasModulate" parent="." index="11"]
+visible = false
+
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." index="12"]
+visible = false
 position = Vector2( -2, 0 )
 occluder = SubResource( 3 )
 

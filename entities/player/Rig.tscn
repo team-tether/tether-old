@@ -1,16 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://entities/player/sprites/player_ball_glow.png" type="Texture" id=1]
+[ext_resource path="res://entities/player/sprites/goldfish.png" type="Texture" id=2]
 [ext_resource path="res://entities/player/Rig.gd" type="Script" id=7]
 
 [node name="Rig" type="Node2D"]
+scale = Vector2( 0.4, 0.4 )
 script = ExtResource( 7 )
 
 [node name="Ball" type="Sprite" parent="."]
-visible = false
-position = Vector2( -8.8441, -8.0504 )
+position = Vector2( 4.04, -8.05 )
 z_index = 1001
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="Glow" type="Sprite" parent="."]
 visible = false

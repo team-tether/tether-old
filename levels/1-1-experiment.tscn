@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/spikes/Spikes.tscn" type="PackedScene" id=2]
@@ -8,9 +8,6 @@
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 946, -68, 0, 0, 0, 0, -852, -61 )
 }
-
-[sub_resource type="OccluderPolygon2D" id=2]
-polygon = PoolVector2Array( -960, 256, -960, -256, 896, -256, 896, -192, -896, -192, -896, 193, 896, 192, 896, -256, 960, -256, 960, 256, -896, 256 )
 
 [node name="Level" instance=ExtResource( 1 )]
 
@@ -22,30 +19,16 @@ gravity = 12.0
 position = Vector2( 792, 0.39801 )
 
 [node name="Spikes" parent="." index="3" instance=ExtResource( 2 )]
+modulate = Color( 1, 1, 1, 1 )
 position = Vector2( -49, 239 )
 curve = SubResource( 1 )
-closed_shape = false
-tessellation_stages = 5
-tessellation_tolerence = 4
-use_global_space = false
-collision_bake_interval = 20
-draw_edges = false
-flip_edges = false
 
 [node name="Terrain" parent="." index="4"]
 texture_scale = Vector2( 5, 5 )
 polygon = PoolVector2Array( -896, 192, 896, 192, 896, -192, -896, -192 )
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="." index="7"]
-occluder = SubResource( 2 )
+[node name="CanvasModulate" parent="." index="6"]
+visible = false
 
-[node name="Girder" parent="." index="8" instance=ExtResource( 3 )]
+[node name="Girder" parent="." index="7" instance=ExtResource( 3 )]
 position = Vector2( 4.23785, 11.6541 )
-closed_shape = false
-tessellation_stages = 5
-tessellation_tolerence = 4
-use_global_space = false
-collision_bake_interval = 20
-draw_edges = false
-mirror_angle = true
-flip_edges = false

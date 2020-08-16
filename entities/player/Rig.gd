@@ -55,7 +55,10 @@ func _process(_delta):
 			var to_pivot = player.position - player.rope.pivot() #duplicate code - bad practice
 			var tolerance = 8 #Just stops the character from shaking if its not swinging much
 			var moving_right = (player.position.x - tolerance) < player.rope.pivot().x #player.velocity.x > 0
-			rotation = -to_pivot.angle_to(Vector2.LEFT if moving_right else Vector2.RIGHT)
+			var adjust_angle = deg2rad(90)
+			if (moving_right == true):
+				adjust_angle = -deg2rad(90)
+			rotation = -to_pivot.angle_to(Vector2.LEFT if moving_right else Vector2.RIGHT) - adjust_angle
 			set_flip_h(!moving_right)
 		"Shooting Rope":
 			pass
