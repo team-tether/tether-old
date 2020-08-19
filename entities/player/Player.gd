@@ -13,7 +13,7 @@ var prev_velocity = velocity
 var angular_velocity = starting_angular_velocity
 
 export var min_rope_length = 15
-export var max_rope_length = 450
+export var max_rope_length = 600 #450
 export var max_rope_shot_angle = PI/4
 export var rope_shot_angle = PI/4 setget set_rope_shot_angle
 export var rope_shot_speed = 20

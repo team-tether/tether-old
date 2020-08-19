@@ -18,6 +18,10 @@ func _ready():
 	var padding = limit_offset + (Vector2.ONE * border)
 	var terrain_bounds: Rect2 = Util.get_bounding_rect(terrain.polygon, padding)
 
+	if (camera.position != Vector2(0,0)):
+		camera.position.x = 0; #Camera breaks if it's not at [0,0]
+		camera.position.y = 0;
+		print("Camera position reset")
 	camera.limit_top = int(terrain_bounds.position.y)
 	camera.limit_left = int(terrain_bounds.position.x)
 	camera.limit_bottom = int(terrain_bounds.end.y)

@@ -36,7 +36,7 @@ static func find_next_level_filename(current_level_filename, backwards = false):
 
 	if next_level_filename:
 		return next_level_filename
-
+		
 	return find_in_array(level_filenames, "1-1")
 
 static func find_in_array(array, substring):

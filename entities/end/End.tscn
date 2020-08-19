@@ -3,7 +3,7 @@
 [ext_resource path="res://entities/end/End.gd" type="Script" id=1]
 
 [sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 0.0340576, 0.170488, 0.272461, 1, 0.443138, 0.836639, 0.995117, 1 )
+colors = PoolColorArray( 0.93457, 0.397024, 0.167931, 1, 1, 0.673828, 0, 1 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )

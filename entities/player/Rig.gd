@@ -12,6 +12,9 @@ onready var glow: Sprite = $Glow
 
 var player
 var current_state = ''
+var default_scale = scale
+var player_velocity = Vector2(0,0)
+var facing_right = true
 
 func _ready():
 	player = get_parent()
@@ -38,18 +41,37 @@ func get_flip_v():
 	return scale.y < 0
 	
 func _physics_process(delta):
+	scale = default_scale #Default
+	
 	match current_state:
 		"Falling":
 			rotation += player.angular_velocity * delta
+			var velocity_y = clamp(player.velocity.y, 1, 20)
+			#var velocity_x = clamp(player.velocity.x, 1, 20)
+			scale.y = default_scale.y * (1 + ((velocity_y / 20)*0.1))
+			scale.x = default_scale.x * (1 - ((velocity_y / 20)*0.1))
+		"Shooting Rope":
+			rotation += player.angular_velocity * delta
+			var velocity_y = clamp(player.velocity.y, 1, 20)
+			#var velocity_x = clamp(player.velocity.x, 1, 20)
+			scale.y = default_scale.y * (1 + ((velocity_y / 20)*0.1))
+			scale.x = default_scale.x * (1 - ((velocity_y / 20)*0.1))
 
 func _process(_delta):
+		
 	#Switch statement
 	match current_state:
 		"Falling":
+			set_flip_h(!sign(player.velocity.x) < 0)
+			var input_direction = player.input_direction()
+			if (input_direction.x != 0):
+				set_flip_h(!sign(input_direction.x) < 0)
 			pass
 		"Grounded":
 			rotation = 0
-			pass
+			var input_direction = player.input_direction()
+			if (input_direction.x > 0):
+				set_flip_h(!sign(input_direction.x) < 0)
 		"Tethered":
 			#Rotate / flip body based on players position compared to rope end point
 			var to_pivot = player.position - player.rope.pivot() #duplicate code - bad practice
@@ -59,8 +81,23 @@ func _process(_delta):
 			if (moving_right == true):
 				adjust_angle = -deg2rad(90)
 			rotation = -to_pivot.angle_to(Vector2.LEFT if moving_right else Vector2.RIGHT) - adjust_angle
-			set_flip_h(!moving_right)
+			
+			var input_direction = player.input_direction()
+			if (input_direction.x != 0):
+				facing_right = sign(input_direction.x)
+				set_flip_h(!sign(input_direction.x) < 0)
+			else:
+				set_flip_h(!moving_right)
 		"Shooting Rope":
-			pass
+			#Rotate / flip body based on players position compared to rope end point
+			var moving_right = rad2deg(player.rope_shot_angle) > 0 #player.velocity.x > 0
+			var adjust_angle = deg2rad(90)
+			if (moving_right == true):
+				adjust_angle = -deg2rad(90)
+				set_flip_h(true)
+			else:
+				set_flip_h(false)
+			rotation = -player.rope_shot_angle - adjust_angle
+			
 			
 

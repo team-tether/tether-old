@@ -1,57 +1,34 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/girder/Girder.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/spikes/Spikes.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -3349, -4492, 0, 0, 0, 0, -3340, 1600, 0, 0, 0, 0, -3231, 1599 )
+"points": PoolVector2Array( 0, 0, 0, 0, 946, -68, 0, 0, 0, 0, -852, -61 )
 }
-
-[sub_resource type="Curve2D" id=2]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 953, 60, 0, 0, 0, 0, 989, 44, 0, 0, 0, 0, 1017, 63 )
-}
-
-[sub_resource type="OccluderPolygon2D" id=3]
-polygon = PoolVector2Array( -32.0206, 123.296, -10.1002, 135.317, -65.2547, 502.306, -775.192, 494.528, -986.617, -232.38, -13.6357, -510.98, -9.39319, 134.61, -169.907, 56.1208, -618.921, 87.9407, -626.113, 21.4725, -58.1837, -41.4602, -121.823, -399.257, -864.287, -195.61, -722.159, 375.734, -128.187, 351.692 )
 
 [node name="Level" instance=ExtResource( 1 )]
-fix_camera_x = false
-fix_camera_y = false
 
 [node name="Player" parent="." index="0"]
-position = Vector2( -3968, -4448 )
-rope_shot_angle = -0.785
+position = Vector2( -683, -22 )
+gravity = 12.0
 
 [node name="End" parent="." index="1"]
-position = Vector2( 171, 166 )
+position = Vector2( 792, 0.39801 )
 
-[node name="Spikes" parent="." index="2" instance=ExtResource( 4 )]
+[node name="Spikes" parent="." index="3" instance=ExtResource( 4 )]
 modulate = Color( 1, 1, 1, 1 )
-position = Vector2( -390.906, -116.325 )
+position = Vector2( -49, 239 )
 curve = SubResource( 1 )
 
-[node name="Spikes2" parent="." index="3" instance=ExtResource( 4 )]
-modulate = Color( 1, 1, 1, 1 )
-position = Vector2( -390.906, -116.325 )
-curve = SubResource( 2 )
+[node name="Terrain" parent="." index="4"]
+texture_scale = Vector2( 5, 5 )
+polygon = PoolVector2Array( -896, 192, 896, 192, 896, -192, -896, -192 )
 
-[node name="Camera" parent="CameraTarget" index="0"]
-position = Vector2( -3968, -4448 )
-
-[node name="Terrain" parent="." index="5"]
-position = Vector2( 0, 100 )
-texture_scale = Vector2( 3, 3 )
-polygon = PoolVector2Array( -3712, -4708, -4224, -4708, -4224, 4348, -3712, 4348, -3712, 2396, -2848, 2396, -2848, 2716, -1362.88, 1693.59, -428.992, 2555.65, 343.262, 3274.02, 1744.09, 2106.66, 2462.47, 1693.59, 4635.56, 4459.34, 6377.62, -263.979, 6072.31, -4538.31, 433.059, -4430.56, -1658.58, -259.876, -2720, 1372, -3712, 1372 )
-
-[node name="Background" parent="." index="6"]
-position = Vector2( 1.72364, 1.66528 )
-
-[node name="CanvasModulate" parent="." index="7"]
+[node name="CanvasModulate" parent="." index="6"]
 visible = false
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="." index="8"]
-visible = false
-position = Vector2( -2, 0 )
-occluder = SubResource( 3 )
+[node name="Girder" parent="." index="7" instance=ExtResource( 2 )]
+position = Vector2( 4.23785, 11.6541 )
