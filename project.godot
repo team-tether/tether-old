@@ -93,7 +93,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Tether"
-run/main_scene="res://levels/1-1-experiment.tscn"
+run/main_scene="res://levels/Test.tscn"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 

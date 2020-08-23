@@ -1,12 +1,28 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/FollowPath.gd" type="Script" id=2]
 [ext_resource path="res://Terrain.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/spikes/Spikes.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -704, -384, 0, 0, 0, 0, -288, -384 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -170, -328, 0, 0, 0, 0, 87, -345, 0, 0, 0, 0, 269, -312 )
+}
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -855, -548, 0, 0, 0, 0, -835, -250, 0, 0, 0, 0, -627, -231 )
+}
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 371, -405, 0, 0, 0, 0, 522, -499, 0, 0, 0, 0, 693, -416 )
 }
 
 [node name="Level" instance=ExtResource( 1 )]
@@ -41,3 +57,14 @@ duration = 2.0
 
 [node name="Terrain2" parent="Path2D/PathFollow2D" index="0" instance=ExtResource( 3 )]
 polygon = PoolVector2Array( -96, -32, -96, 32, 96, 32, 96, -32 )
+
+[node name="Spikes" parent="." index="7" instance=ExtResource( 4 )]
+curve = SubResource( 2 )
+flip_edges = true
+
+[node name="Spikes2" parent="." index="8" instance=ExtResource( 4 )]
+curve = SubResource( 3 )
+flip_edges = true
+
+[node name="Spikes3" parent="." index="9" instance=ExtResource( 4 )]
+curve = SubResource( 4 )
