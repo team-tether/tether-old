@@ -7,7 +7,7 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -960, 667, 0, 0, 0, 0, 279, 264, 0, 0, 0, 0, 1227, 687 )
+"points": PoolVector2Array( 0, 0, 0, 0, -3542, 2349, 0, 0, 0, 0, -3302, 2129, 0, 0, 0, 0, -2903, 2128 )
 }
 
 [sub_resource type="Resource" id=2]
@@ -33,7 +33,6 @@ collision_offset = -0.336
 collision_extends = 0.0
 
 [node name="Spikes" type="Node2D"]
-modulate = Color( 0.4, 0.568627, 0.635294, 1 )
 position = Vector2( -48, 64 )
 script = ExtResource( 4 )
 editor_debug = null
@@ -49,5 +48,5 @@ script = ExtResource( 1 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( -968.523, 653.108, 281.175, 242.108, 1238.23, 673.66, 1215.77, 700.34, 276.825, 285.892, -951.477, 680.892 )
+polygon = PoolVector2Array( -3560.62, 2338.23, -3315.05, 2111.29, -2903.07, 2113.39, -2902.93, 2142.61, -3288.95, 2146.71, -3523.38, 2359.77 )
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
