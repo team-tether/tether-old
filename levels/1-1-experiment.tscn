@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/spikes/Spikes.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Terrain.tscn" type="PackedScene" id=3]
-[ext_resource path="res://entities/saw/Saw.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -12,7 +10,7 @@ _data = {
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -3805, -4492, 0, 0, 0, 0, -3819, 1585 )
+"points": PoolVector2Array( 0, 0, 0, 0, -3805, -4492, 0, 0, 0, 0, -3814, 4548, 0, 0, 0, 0, -3331, 4548, 0, 0, 0, 0, -3332, 3236 )
 }
 
 [node name="Level" instance=ExtResource( 1 )]
@@ -27,15 +25,19 @@ rope_shot_angle = -0.785
 position = Vector2( 171, 166 )
 
 [node name="Spikes" parent="." index="2" instance=ExtResource( 2 )]
+modulate = Color( 1, 1, 1, 1 )
 position = Vector2( -390.906, -116.325 )
 curve = SubResource( 1 )
 
 [node name="Spikes2" parent="." index="3" instance=ExtResource( 2 )]
+modulate = Color( 1, 1, 1, 1 )
 position = Vector2( -390.906, -116.325 )
 curve = SubResource( 2 )
 flip_edges = true
 
-[node name="Spikes3" parent="." index="4" instance=ExtResource( 2 )]
+[node name="Spikes-Why-Are-They-Invisible" parent="." index="4" instance=ExtResource( 2 )]
+modulate = Color( 1, 1, 1, 1 )
+collision_polygon_node = NodePath("../Spikes-Why-Are-They-Invisible/Area2D/CollisionPolygon2D")
 
 [node name="Camera" parent="CameraTarget" index="0"]
 position = Vector2( -3968, -4448 )
@@ -50,12 +52,3 @@ position = Vector2( 1.72364, 1.66528 )
 
 [node name="CanvasModulate" parent="." index="8"]
 visible = false
-
-[node name="Terrain2" parent="." index="9" instance=ExtResource( 3 )]
-polygon = PoolVector2Array( -2240, 1504, -896, 1504, -896, 1440, -2240, 1440 )
-
-[node name="Rotating_Saw3" parent="." index="10" instance=ExtResource( 4 )]
-position = Vector2( -4128, 4480 )
-
-[node name="Rotating_Saw2" parent="." index="11" instance=ExtResource( 4 )]
-position = Vector2( -3840, 4480 )
