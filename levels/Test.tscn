@@ -4,25 +4,21 @@
 [ext_resource path="res://levels/FollowPath.gd" type="Script" id=2]
 [ext_resource path="res://Terrain.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/spikes/Spikes.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/saw/Saw.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -704, -384, 0, 0, 0, 0, -288, -384 )
+"points": PoolVector2Array( 0, 0, 0, 0, -849, -583, 0, 0, 0, 0, -850, 443 )
 }
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -170, -328, 0, 0, 0, 0, 87, -345, 0, 0, 0, 0, 269, -312 )
+"points": PoolVector2Array( 0, 0, 0, 0, 424, -269, 0, 0, 0, 0, 960, -270, 0, 0, 0, 0, 960, -581 )
 }
 
 [sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -855, -548, 0, 0, 0, 0, -835, -250, 0, 0, 0, 0, -627, -231 )
-}
-
-[sub_resource type="Curve2D" id=4]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 371, -405, 0, 0, 0, 0, 522, -499, 0, 0, 0, 0, 693, -416 )
+"points": PoolVector2Array( 0, 0, 0, 0, -704, -384, 0, 0, 0, 0, -288, -384 )
 }
 
 [node name="Level" instance=ExtResource( 1 )]
@@ -34,20 +30,31 @@ rope_shot_angle = -0.785
 [node name="End" parent="." index="1"]
 position = Vector2( 1120, -448 )
 
-[node name="Terrain" parent="." index="3"]
+[node name="Spikes2" parent="." index="2" instance=ExtResource( 4 )]
+curve = SubResource( 1 )
+flip_edges = true
+
+[node name="Spikes3" parent="." index="3" instance=ExtResource( 4 )]
+curve = SubResource( 2 )
+flip_edges = true
+
+[node name="Rotating_Saw" parent="." index="4" instance=ExtResource( 5 )]
+position = Vector2( -545.886, -91.9239 )
+
+[node name="Terrain" parent="." index="6"]
 position = Vector2( 0, 94.7401 )
 texture_scale = Vector2( 3, 3 )
 polygon = PoolVector2Array( -928, 412, 928, 412, 928, 124, -640, 124, -640, -292, -384, -292, -383.266, -302.554, -352.312, -302.554, -352, -292, 928, -292, 928, -612, -928, -612 )
 
-[node name="Background" parent="." index="4"]
+[node name="Background" parent="." index="7"]
 position = Vector2( 1.72364, 1.66528 )
 
-[node name="CanvasModulate" parent="." index="5"]
+[node name="CanvasModulate" parent="." index="8"]
 color = Color( 1, 1, 1, 1 )
 
-[node name="Path2D" type="Path2D" parent="." index="6"]
+[node name="Path2D" type="Path2D" parent="." index="9"]
 position = Vector2( 352, -32 )
-curve = SubResource( 1 )
+curve = SubResource( 3 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D" index="0"]
 position = Vector2( -704, -384 )
@@ -57,14 +64,3 @@ duration = 2.0
 
 [node name="Terrain2" parent="Path2D/PathFollow2D" index="0" instance=ExtResource( 3 )]
 polygon = PoolVector2Array( -96, -32, -96, 32, 96, 32, 96, -32 )
-
-[node name="Spikes" parent="." index="7" instance=ExtResource( 4 )]
-curve = SubResource( 2 )
-flip_edges = true
-
-[node name="Spikes2" parent="." index="8" instance=ExtResource( 4 )]
-curve = SubResource( 3 )
-flip_edges = true
-
-[node name="Spikes3" parent="." index="9" instance=ExtResource( 4 )]
-curve = SubResource( 4 )
